@@ -1,0 +1,69 @@
+<app-header></app-header>
+<div class="book-store">
+
+       
+    <div class="main-wrapper">
+    
+     <div class="popular-books">
+      <div class="main-menu">
+       <div class="genre">Popular by Genre</div>
+       <div class="book-types">
+        <a href="#" class="book-type active"> All Genres</a>
+        <a href="{{genre}}" class="book-type" *ngFor="let genre of Genres" > {{genre}}</a>
+       
+       </div>
+      </div>
+      <div class="book-cards">
+       <div class="book-card" *ngFor="let book of Books">
+        <div class="content-wrapper">
+        <img  src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F6%2F2019%2F07%2Fchances-are-1-2000.jpg&q=85" alt="" class="book-card-img">
+        <div class="card-content">
+            <div class="book-name">{{book.title}}</div>
+                <div class="book-by">by {{book.authors}}</div>
+                <div class="rate">
+                <fieldset class="rating book-rate">
+    <input type="checkbox" id="star-c1" name="rating" value="5">
+    <label class="full" for="star-c1"></label>
+    <input type="checkbox" id="star-c2" name="rating" value="4">
+    <label class="full" for="star-c2"></label>
+    <input type="checkbox" id="star-c3" name="rating" value="3">
+    <label class="full" for="star-c3"></label>
+    <input type="checkbox" id="star-c4" name="rating" value="2">
+    <label class="full" for="star-c4"></label>
+    <input type="checkbox" id="star-c5" name="rating" value="1">
+    <label class="full" for="star-c5"></label>
+                </fieldset>
+                <span class="book-voters card-vote">1.987 voters</span>
+            </div>
+
+            <div class="book-sum card-sum">Readers of all ages and walks of life have drawn inspiration and empowerment from Elizabeth Gilbert’s books for years. </div>
+            <div class="show-details">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                    <a [routerLink]="['/books', book.id]">show details</a> 
+                  </button>
+
+
+            </div>
+        </div>
+           
+        
+       </div>
+        <div class="likes">
+        <div class="like-profile">
+       <img src="https://randomuser.me/api/portraits/women/63.jpg" alt="" class="like-img">
+      </div>
+        <div class="like-profile">
+       <img src="https://pbs.twimg.com/profile_images/2452384114/noplz47r59v1uxvyg8ku.png" alt="" class="like-img">
+      </div>
+        <div class="like-profile">
+       <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80" alt="" class="like-img">
+      </div>
+        <div class="like-name"><span>Samantha William</span> and<span> 2 other friends</span> like this</div>
+      </div>
+       </div>
+       
+       
+      </div>
+     </div>
+    </div>
+   </div>
