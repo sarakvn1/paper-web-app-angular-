@@ -1,5 +1,5 @@
 import { Component, OnInit,Input,EventEmitter,Output } from '@angular/core';
-import { ApiService } from 'src/app/shared/services/api.service';
+import { ApiService } from 'app/shared/services/api.service';
 
 @Component({
   selector: 'app-book-list',

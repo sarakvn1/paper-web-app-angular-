@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ApiService } from 'src/app/shared/services/api.service';
+import { faCoffee, faStar } from '@fortawesome/free-solid-svg-icons';
+import { ApiService } from 'app/shared/services/api.service';
+
 declare const bookDetail:any
 @Component({
   selector: 'app-book-details',
@@ -9,11 +11,14 @@ declare const bookDetail:any
 })
 export class BookDetailsComponent implements OnInit {
   book:any
+  quantity=5
+  BookRate=2
+  faStar=faStar
   constructor(private _Activatedroute:ActivatedRoute,
     private apiService:ApiService ) { }
   id=null;
   ngOnInit() {
-    bookDetail()
+    // bookDetail()
     this.id=this._Activatedroute.snapshot.paramMap.get("id");
 
     this.apiService.getBookById(this.id).subscribe(
@@ -22,5 +27,16 @@ export class BookDetailsComponent implements OnInit {
       },
       error=>console.log(error))
   }
-
+  plus=(evt)=>{
+    this.quantity++
+  }
+  minus=(evt)=>{
+    if (this.quantity ==1){
+     this.quantity=this.quantity
+    }
+    else {
+     this.quantity --
+    }
+    
+  }
 }
