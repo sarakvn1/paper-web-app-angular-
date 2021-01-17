@@ -48,6 +48,14 @@
                     <input type="radio" id="star1" name="rate" value="1" />
                     <label for="star1" title="text">1 star</label> -->
                   </div>
+                  <div class="rate-container">
+                    <p>rate this book</p>
+                    <fa-icon [icon]="faStar" (mouseenter)="rateHover(rate)"
+                     *ngFor="let rate of [1,2,3,4,5]" 
+                     (mouseleave)="rateHovered=0"
+                     (click)="rateClicked(rate)"
+                     [ngClass]="{'purple':rateHovered >=rate}" ></fa-icon>
+                  </div>
                 <span>3 Reviews</span>
               </div>
                   <div class="product-price-discount"><span>$39.00</span><span class="line-through">$29.00</span></div>
@@ -136,7 +144,7 @@
                       </div>
                     </div>
                   </div>
-                  <button class="round-black-btn">Submit Review</button>
+                  <button (click)="submitReview()" class="round-black-btn">Submit Review</button>
                 </form>
             </div>
         </div>

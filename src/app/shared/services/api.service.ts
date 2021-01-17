@@ -15,6 +15,12 @@ export class ApiService {
   getBooks(){
     return this.httpClient.get(this.baseUrl,{headers:this.headers})
   }
+
+  RateBooks(rate:number,bookId:number){
+    const body={}
+    return this.httpClient.post(this.baseUrl,body,{headers:this.headers})
+  }
+
   getGenres(){
     return this.Genres
   }

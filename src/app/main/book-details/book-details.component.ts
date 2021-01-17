@@ -39,4 +39,22 @@ export class BookDetailsComponent implements OnInit {
     }
     
   }
+  rateHovered=0
+  rateHover(rate){
+    this.rateHovered=rate
+  }
+  submitReview(){
+    
+  }
+
+  rateClicked(rate){
+    const bookId=Number(this.id)
+    this.apiService.RateBooks(rate,bookId).subscribe(
+      result=>{
+        console.log(result)
+      },
+      error=>console.log(error)
+      
+    )
+  }
 }

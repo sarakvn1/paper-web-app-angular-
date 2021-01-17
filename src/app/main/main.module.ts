@@ -8,6 +8,8 @@ import { HeaderComponent } from './header/header.component';
 import { ApiService } from '../shared/services/api.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
+import { FooterComponent } from './footer/footer.component';
+import { PopularBookComponent } from './popular-book/popular-book.component';
 
 
 const routes: Routes = [
@@ -21,7 +23,7 @@ const routes: Routes = [
   declarations: [
     MainComponent,
     BookListComponent, 
-    BookDetailsComponent, HeaderComponent],
+    BookDetailsComponent, HeaderComponent, FooterComponent, PopularBookComponent],
   imports: [
     CommonModule,
     FormsModule,
