@@ -2,7 +2,7 @@
 <p>{{id}}</p>
 <p>{{book.title}}</p> -->
 
-<app-header></app-header>
+<app-header ></app-header>
 
 <div *ngIf="book">
   <div class="pd-wrap">
@@ -78,14 +78,14 @@
                 </div>
                 <div class="product-count">
                   <label for="size">Quantity</label>
-                  <form action="#" class="display-flex">
+                  <form action="#" [formGroup]="quantityForm" class="display-flex">
                     <div class="">
                       <button class="btn btn-primary" (click)="minus($event)">-</button>
                     </div>
-                    <input type="text" name="quantity"  [(ngModel)]="quantity" >
+                    <input type="text" name="quantity" formControlName="quantity" [(ngModel)]="quantity" >
                     <div class=""> <button class="btn btn-primary" (click)="plus($event)">+</button></div>
                   </form>
-                  <a href="" class="round-black-btn">Add to Cart</a>
+                  <button (click)="addToCard(book)" class="round-black-btn">Add to Cart</button>
                 </div>
               </div>
             </div>

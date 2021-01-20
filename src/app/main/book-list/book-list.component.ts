@@ -8,21 +8,27 @@ import { ApiService } from 'app/shared/services/api.service';
 })
 export class BookListComponent implements OnInit {
 
- Books:any
-  constructor(private apiService:ApiService) { }
+
+  // @Input() books:any;
+  // @Output() selectBook=new EventEmitter()
+  books:any
+  selectedBook:null
+  constructor(
+    private apiService:ApiService
+    ) { }
   Genres=[]
   
   ngOnInit(){
     
-    this.Genres=this.apiService.getGenres()
+    
     this.Genres=this.apiService.getGenres()
     this.apiService.getBooks().subscribe(
       data=>{
-        this.Books=data
+        this.books=data
       },
       error=>console.log(error))
   }
-  BookClicked(book){
-
-  }
+  // bookClicked(book){
+  //   this.selectBook.emit(book)
+  // }
 }

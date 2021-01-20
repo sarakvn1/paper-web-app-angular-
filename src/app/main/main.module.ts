@@ -7,12 +7,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { ApiService } from '../shared/services/api.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
 import { PopularBookComponent } from './popular-book/popular-book.component';
+import { HomeComponent } from './home/home.component';
+import { ReviewFormComponent } from './book-details/review-form/review-form.component';
 
 
 const routes: Routes = [
+  {path:'home',component:MainComponent},
   {path:'main',component:MainComponent},
   {path:'books',component:BookListComponent},
   {path:'books/:id',component:BookDetailsComponent}
@@ -23,8 +26,9 @@ const routes: Routes = [
   declarations: [
     MainComponent,
     BookListComponent, 
-    BookDetailsComponent, HeaderComponent, FooterComponent, PopularBookComponent],
+    BookDetailsComponent, HeaderComponent, FooterComponent, PopularBookComponent, HomeComponent, ReviewFormComponent],
   imports: [
+    ReactiveFormsModule,
     CommonModule,
     FormsModule,
     FontAwesomeModule,

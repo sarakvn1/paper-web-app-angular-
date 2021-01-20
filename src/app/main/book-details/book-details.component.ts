@@ -1,7 +1,9 @@
 import { Component, Input,EventEmitter,Output, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faCoffee, faStar } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from 'app/shared/services/api.service';
+import { MessageService } from 'app/shared/services/message.service';
 
 declare const bookDetail:any
 @Component({
@@ -12,14 +14,29 @@ declare const bookDetail:any
 export class BookDetailsComponent implements OnInit {
   book:any
   quantity=5
+  
   // @Input() book;
-  // @Output() updateBook=new EventEmitter()
+  @Output() bookAdded=new EventEmitter()
   BookRate=2
   faStar=faStar
-  constructor(private _Activatedroute:ActivatedRoute,
-    private apiService:ApiService ) { }
+  constructor(
+    private _Activatedroute:ActivatedRoute,
+    private apiService:ApiService,
+    private messageService:MessageService
+     ) { }
+
+     sendMessage(message): void {
+      // send message to subscribers via observable subject
+      this.messageService.sendMessage(message);
+  }
+
+  clearMessages(): void {
+      // clear messages
+      this.messageService.clearMessages();
+  }
   id=null;
   ngOnInit() {
+    // this.sendMessage()
     // bookDetail()
     this.id=this._Activatedroute.snapshot.paramMap.get("id");
 
@@ -45,7 +62,12 @@ export class BookDetailsComponent implements OnInit {
   rateHover(rate){
     this.rateHovered=rate
   }
- 
+  quantityForm=new FormGroup(
+    {
+      quantity:new FormControl('')
+     
+    }
+  )
 
   rateClicked(rate){
     const bookId=Number(this.id)
@@ -62,5 +84,19 @@ export class BookDetailsComponent implements OnInit {
       },
       error=>console.log(error))
       
+  }
+  refresh=false
+  addToCard(book){
+
+    var today=new Date
+     const order={
+      bookId:book.id,
+      quantity:this.quantityForm.value.quantity,
+      date:today
+    }
+    this.sendMessage("one item added")
+    console.log("this is book id",book.id)
+    this.apiService.getOrders(order)
+    
   }
 }

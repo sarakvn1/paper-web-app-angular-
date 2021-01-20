@@ -71,15 +71,34 @@ export class ApiService {
     })
   }
   orderList = []
+  bookExists=false
   getOrderItems(){
-    console.log("this is book id")
-    console.log(this.orderList[0].bookId)
+    // console.log("this is book id")
+    // console.log(this.orderList[0].bookId)
     return this.orderList
   }
+
   getOrders(order:Order){
-    
-    this.orderList.push(order)
-    console.log(this.orderList[0].bookId)
-    
+    if (this.orderList.length>0){
+      this.bookExists=false
+      for (var i=0; i<this.orderList.length;i++){
+        if (order.bookId==this.orderList[i].bookId){
+          this.bookExists=true
+          this.orderList[i].quantity=this.orderList[i].quantity+order.quantity
+        }
+      }
+      if (this.bookExists ==false) {
+        this.orderList.push(order)
+      }
+    }else{
+      this.orderList.push(order)
+    }
   }
+  
+  
 }
+    
+    
+    
+  
+

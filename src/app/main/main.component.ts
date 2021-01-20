@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { ApiService } from '../shared/services/api.service';
 
 @Component({
@@ -8,17 +10,22 @@ import { ApiService } from '../shared/services/api.service';
 })
 export class MainComponent implements OnInit {
 
-  constructor(private apiService:ApiService) { }
-  Books:any=[]
+  constructor(
+    private apiService:ApiService,
+    private cookieService:CookieService,
+    private router:Router
+    
+    ) { }
+   books:any=[]
   Genres:any=[]
-  SelectedBook=null
+  // selectedBook=null
   ngOnInit() {
-    this.Genres=this.apiService.getGenres()
-    this.apiService.getBooks().subscribe(
-      data=>{
-        this.Books=data
-      },
-      error=>console.log(error))
-  }
 
+
+    
+    
+  }
+  // selectBook(book){
+  //   this.selectedBook=book
+  // }
 }

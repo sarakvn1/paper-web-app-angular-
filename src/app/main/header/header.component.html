@@ -15,9 +15,22 @@
       <li class="nav-item">
         <a class="nav-link" href="#">sign in</a>
       </li>
+
+     <div *ngIf="showUserMenu">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+          <fa-icon [icon]="faUser" ></fa-icon>
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" (click)="logout()" href="#">Log out</a>
+          <a class="dropdown-item" href="#"> my profile</a>
+          
+        </div>
+      </li>
+     </div>
      
       
-
+      
       
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -26,9 +39,11 @@
           </svg>
         </a>
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">first item</a>
-          <a class="dropdown-item" href="#">second item</a>
-          <a class="dropdown-item" href="#">third item</a>
+          <a class="dropdown-item"  *ngFor="let item of orderList" >
+            
+            {{item.bookId}}-{{item.quantity}}
+          </a>
+          
         </div>
       </li>
       

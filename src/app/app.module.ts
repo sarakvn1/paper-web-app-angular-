@@ -7,13 +7,15 @@ import { MainModule } from './main/main.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+
 const routes:Routes=[
-  {path:'',pathMatch:'full',redirectTo:'main'}
+  {path:'',pathMatch:'full',redirectTo:'auth'}
   
 ]
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+   
   ],
   imports: [
     AuthModule,
