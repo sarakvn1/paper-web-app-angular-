@@ -12,13 +12,17 @@ import { FooterComponent } from './footer/footer.component';
 import { PopularBookComponent } from './popular-book/popular-book.component';
 import { HomeComponent } from './home/home.component';
 import { ReviewFormComponent } from './book-details/review-form/review-form.component';
+import { CustomerProfileComponent } from './customer-profile/customer-profile.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 
 
 const routes: Routes = [
   {path:'home',component:MainComponent},
   {path:'main',component:MainComponent},
   {path:'books',component:BookListComponent},
-  {path:'books/:id',component:BookDetailsComponent}
+  {path:'books/:id',component:BookDetailsComponent},
+  {path:'profile',component:CustomerProfileComponent},
+  {path:'admin',component:AdminPanelComponent}
   
 ];
 
@@ -26,7 +30,7 @@ const routes: Routes = [
   declarations: [
     MainComponent,
     BookListComponent, 
-    BookDetailsComponent, HeaderComponent, FooterComponent, PopularBookComponent, HomeComponent, ReviewFormComponent],
+    BookDetailsComponent, HeaderComponent, FooterComponent, PopularBookComponent, HomeComponent, ReviewFormComponent, CustomerProfileComponent, AdminPanelComponent],
   imports: [
     ReactiveFormsModule,
     CommonModule,

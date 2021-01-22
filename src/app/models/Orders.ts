@@ -1,6 +1,6 @@
 export interface Order{
-    bookId:number
+    book_id:number
     quantity:number
-    date:Date
+    date:string
     
 }

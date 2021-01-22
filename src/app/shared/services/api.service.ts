@@ -67,22 +67,46 @@ export class ApiService {
      const token=this.cookieServic.get('bookstore-token')
     return new HttpHeaders({
       'Content-Type':'application/json',
+      'Accept-Language':'fa',
       Authorization:`Token ${token}` 
+      
     })
   }
   orderList = []
   bookExists=false
   getOrderItems(){
     // console.log("this is book id")
-    // console.log(this.orderList[0].bookId)
+    
+    const myobj={'id':3}
+    // console.log("this is normal",JSON.stringify({'id':3}))
+    // console.log("this is order",JSON.stringify({...this.orderList[0], ...myobj}))
     return this.orderList
   }
+  
+  sendOrders(body){
+      console.log("this is body",body)
+      return this.httpClient.post(`${this.LoginUrl}api/storehouse/create_order/` ,body,{headers:this.getAuthHeaders()})
+    }
+  
 
+  senOrderItems() {
+    var x:any=[]
+    const finalOrderList=this.orderList
+    const factorObj={factorCode:"951"}
+    for (var i=0; i<this.orderList.length;i++){
+      console.log("this is order item",i,finalOrderList[i],i)
+      console.log("this is i",i)
+      const body=JSON.stringify({...finalOrderList[i], ...factorObj})
+      x=this.sendOrders(body)
+
+  }
+  return x
+}
   getOrders(order:Order){
     if (this.orderList.length>0){
       this.bookExists=false
       for (var i=0; i<this.orderList.length;i++){
-        if (order.bookId==this.orderList[i].bookId){
+        if (order.book_id==this.orderList[i].book_id){
           this.bookExists=true
           this.orderList[i].quantity=this.orderList[i].quantity+order.quantity
         }
@@ -93,6 +117,7 @@ export class ApiService {
     }else{
       this.orderList.push(order)
     }
+    // this.sendOrders()
   }
   
   

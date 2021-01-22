@@ -23,7 +23,8 @@
         </a>
         <div class="dropdown-menu">
           <a class="dropdown-item" (click)="logout()" href="#">Log out</a>
-          <a class="dropdown-item" href="#"> my profile</a>
+          <a class="dropdown-item" [routerLink]="['/profile']"> my profile</a>
+          <a class="dropdown-item" [routerLink]="['/admin']"> admin</a>
           
         </div>
       </li>
@@ -41,7 +42,7 @@
         <div class="dropdown-menu">
           <a class="dropdown-item"  *ngFor="let item of orderList" >
             
-            {{item.bookId}}-{{item.quantity}}
+            {{item.book_id}}-{{item.quantity}}
           </a>
           
         </div>

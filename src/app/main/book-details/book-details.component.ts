@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { faCoffee, faStar } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from 'app/shared/services/api.service';
 import { MessageService } from 'app/shared/services/message.service';
+import * as moment from 'moment';
 
 declare const bookDetail:any
 @Component({
@@ -13,7 +14,7 @@ declare const bookDetail:any
 })
 export class BookDetailsComponent implements OnInit {
   book:any
-  quantity=5
+  quantity=1
   
   // @Input() book;
   @Output() bookAdded=new EventEmitter()
@@ -88,15 +89,21 @@ export class BookDetailsComponent implements OnInit {
   refresh=false
   addToCard(book){
 
-    var today=new Date
+    var today=moment().format();  
      const order={
-      bookId:book.id,
+      book_id:book.id,
       quantity:this.quantityForm.value.quantity,
       date:today
     }
     this.sendMessage("one item added")
     console.log("this is book id",book.id)
     this.apiService.getOrders(order)
+    this.apiService.senOrderItems().subscribe(
+      data=>{
+        console.log(data)
+        
+      },
+      error=>console.log(error))
     
   }
 }
