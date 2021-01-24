@@ -8,10 +8,11 @@
       <div class="main-menu">
        <div class="genre">Popular by Genre</div>
        <div class="book-types">
-        <a href="#" class="book-type active"> All Genres</a>
-        <a href="{{genre}}" class="book-type" *ngFor="let genre of Genres" > {{genre}}</a>
+        <a (click)="getAllBooks()" class="book-type active"> All Genres</a>
+        <a (click)="getGenreBooks(genre.id)" class="book-type" *ngFor="let genre of genres" > {{genre.name}}</a>
        
        </div>
+
       </div>
       <div class="book-cards">
        <div class="book-card" *ngFor="let book of books">

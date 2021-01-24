@@ -2,9 +2,11 @@ import { Component, Input,EventEmitter,Output, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faCoffee, faStar } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 import { ApiService } from 'app/shared/services/api.service';
 import { MessageService } from 'app/shared/services/message.service';
 import * as moment from 'moment';
+import { CookieService } from 'ngx-cookie-service';
 
 declare const bookDetail:any
 @Component({
@@ -20,11 +22,22 @@ export class BookDetailsComponent implements OnInit {
   @Output() bookAdded=new EventEmitter()
   BookRate=2
   faStar=faStar
+  lang:string
   constructor(
     private _Activatedroute:ActivatedRoute,
     private apiService:ApiService,
-    private messageService:MessageService
-     ) { }
+    private messageService:MessageService,
+    private translate:TranslateService,
+    private cookieService:CookieService
+     ) {
+      translate.setDefaultLang('fa');
+      this.lang=this.cookieService.get('lang')
+      if (this.lang=='en'){
+        this.translate.use('en');
+      }else if (this.lang='fa'){
+        this.translate.use('fa');
+      }
+      }
 
      sendMessage(message): void {
       // send message to subscribers via observable subject
@@ -96,7 +109,7 @@ export class BookDetailsComponent implements OnInit {
       date:today
     }
     this.sendMessage("one item added")
-    console.log("this is book id",book.id)
+    
     this.apiService.getOrders(order)
     this.apiService.senOrderItems().subscribe(
       data=>{

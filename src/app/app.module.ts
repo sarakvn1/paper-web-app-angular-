@@ -4,9 +4,13 @@ import {RouterModule,Routes} from '@angular/router'
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { MainModule } from './main/main.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+export function HttpLoaderFactory(http: HttpClient) {
+return new TranslateHttpLoader(http);
+}
 
 const routes:Routes=[
   {path:'',pathMatch:'full',redirectTo:'auth'}
@@ -22,7 +26,13 @@ const routes:Routes=[
     MainModule,
     RouterModule.forRoot(routes),
     BrowserModule,
-    HttpClientModule,
+    HttpClientModule,TranslateModule.forRoot({
+      loader: {
+      provide: TranslateLoader,
+      useFactory: HttpLoaderFactory,
+      deps: [HttpClient]
+      }
+      }),
     FontAwesomeModule
   ],
   exports:[RouterModule],

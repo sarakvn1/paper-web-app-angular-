@@ -3,6 +3,9 @@ import {HttpClient,HttpHeaders} from '@angular/common/http'
 import { CookieService } from 'ngx-cookie-service';
 import { Book } from 'app/models/Book';
 import { Order } from 'app/models/Orders';
+import { MessageService } from './message.service';
+import { Subscription } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,18 +15,50 @@ export class ApiService {
   baseUrl='http://localhost:8000/api/books/'
   LoginUrl='http://localhost:8000/'
   reviewUrl='http://localhost:8000/api/bookreviews/reviewList/'
-  private Genres=['Business','Biography','Fiction','Philosoph','Science',]
-  
+  // private Genres=['Business','Biography','Fiction','Philosoph','Science',]
+  messages: any[] = [];
+  subscription: Subscription;
+
   headers=new HttpHeaders({
     'Content-Type':'application/json',
      
   })
   constructor(
     private httpClient:HttpClient,
-    private cookieServic:CookieService
-    ) { }
+    private cookieService:CookieService,
+    
+    private translate:TranslateService
+    ) {
+      
+     }
+  
+
   getBooks(){
     return this.httpClient.get(this.baseUrl,{headers:this.getAuthHeaders()})
+  }
+  getAuthors(){
+    
+    return this.httpClient.get(`${this.LoginUrl}api/authors/`,{headers:this.getAuthHeaders()})
+  }
+  getPublishers(){
+    
+    return this.httpClient.get(`${this.LoginUrl}api/publishers/`,{headers:this.getAuthHeaders()})
+  }
+  getBooksByGenre(id){
+    const body=JSON.stringify({genreId:id})
+    return this.httpClient.post(`${this.LoginUrl}api/genres/bookList/`,body,{headers:this.getAuthHeaders()})
+  }
+  getBooksByPublisher(id){
+    const body=JSON.stringify({publisherId:id})
+    return this.httpClient.post(`${this.LoginUrl}api/publishers/bookList/`,body,{headers:this.getAuthHeaders()})
+  }
+  getBooksByAuthor(id){
+    const body=JSON.stringify({authorId:id})
+    return this.httpClient.post(`${this.LoginUrl}api/authors/bookList/`,body,{headers:this.getAuthHeaders()})
+  }
+  getEverythingBySearch(searchvalue){
+    const body=JSON.stringify({search:searchvalue})
+    return this.httpClient.post(`${this.baseUrl}search_book/`,body,{headers:this.getAuthHeaders()})
   }
 
   getBook(id){
@@ -45,7 +80,8 @@ export class ApiService {
     return this.httpClient.post(this.reviewUrl ,body,{headers:this.getAuthHeaders()})
   }
   getGenres(){
-    return this.Genres
+    // const bookid=id.toString()
+    return this.httpClient.get(`${this.LoginUrl}api/genres/`,{headers:this.getAuthHeaders()})
   }
 
   loginUser(authData){
@@ -62,12 +98,25 @@ export class ApiService {
     const bookid=id.toString()
     return this.httpClient.get(this.baseUrl+bookid+'/',{headers:this.getAuthHeaders()})
   }
-
+  changeLang(direction){
+    const dom: any = document.querySelector('body');
+    if (direction === 'rtl' && !dom.classList.contains('rtl')) {
+      dom.classList.toggle('rtl');
+    }
+    if (direction === 'ltr' && dom.classList.contains('rtl')) {    
+      dom.classList.toggle('rtl');
+    }        
+  }
   getAuthHeaders(){
-     const token=this.cookieServic.get('bookstore-token')
+    const language=this.cookieService.get('language')
+    const direction=this.cookieService.get('direction')
+    this.changeLang(direction)
+    console.log("this is direction",direction)
+    console.log("this is lang cookie",language)
+    const token=this.cookieService.get('bookstore-token')
     return new HttpHeaders({
       'Content-Type':'application/json',
-      'Accept-Language':'fa',
+      'Accept-Language':language,
       Authorization:`Token ${token}` 
       
     })
@@ -91,11 +140,10 @@ export class ApiService {
 
   senOrderItems() {
     var x:any=[]
-    const finalOrderList=this.orderList
+    const orders=JSON.parse(this.cookieService.get('orderlist'))
+    const finalOrderList=orders
     const factorObj={factorCode:"951"}
-    for (var i=0; i<this.orderList.length;i++){
-      console.log("this is order item",i,finalOrderList[i],i)
-      console.log("this is i",i)
+    for (var i=0; i<finalOrderList.length;i++){
       const body=JSON.stringify({...finalOrderList[i], ...factorObj})
       x=this.sendOrders(body)
 
@@ -117,6 +165,7 @@ export class ApiService {
     }else{
       this.orderList.push(order)
     }
+    this.cookieService.set('orderlist',JSON.stringify(this.orderList))
     // this.sendOrders()
   }
   

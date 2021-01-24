@@ -9,6 +9,7 @@ export class MessageService {
   constructor() { }
 
   private subject = new Subject<any>();
+  private language = new Subject<any>();
 
     sendMessage(message: string) {
         this.subject.next({ text: message });
@@ -21,4 +22,16 @@ export class MessageService {
     getMessage(): Observable<any> {
         return this.subject.asObservable();
     }
+
+  sendMessageLanguage(message: string) {
+      this.language.next({ text: message });
+  }
+
+  clearMessagesLanguage() {
+      this.language.next();
+  }
+
+  getMessageLanguage(): Observable<any> {
+      return this.language.asObservable();
+  }
 }

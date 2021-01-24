@@ -14,7 +14,12 @@ import { HomeComponent } from './home/home.component';
 import { ReviewFormComponent } from './book-details/review-form/review-form.component';
 import { CustomerProfileComponent } from './customer-profile/customer-profile.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
-
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+export function HttpLoaderFactory(http: HttpClient) {
+return new TranslateHttpLoader(http);
+}
 
 const routes: Routes = [
   {path:'home',component:MainComponent},
@@ -34,6 +39,14 @@ const routes: Routes = [
   imports: [
     ReactiveFormsModule,
     CommonModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+      provide: TranslateLoader,
+      useFactory: HttpLoaderFactory,
+      deps: [HttpClient]
+      }
+      }),
     FormsModule,
     FontAwesomeModule,
     RouterModule.forChild(routes)

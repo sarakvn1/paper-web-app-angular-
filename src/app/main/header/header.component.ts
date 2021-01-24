@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { faCoffee, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faCoffee, faFlag, faUser } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 import { ApiService } from 'app/shared/services/api.service';
 import { MessageService } from 'app/shared/services/message.service';
 import { CookieService } from 'ngx-cookie-service';
@@ -14,13 +16,35 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit ,OnDestroy{
   orderList=[]
   messages: any[] = [];
+  searchResult:any
+  lang:string
+  onSearchChange(searchValue: string): void {  
+    this.apiService.getEverythingBySearch(searchValue).subscribe(
+      data=>{
+        console.log("this is data",data)
+        // this.searchResult=data
+        // console.log("sho books",this.books)
+
+      },
+      error=>console.log(error)
+    )
+    console.log(searchValue);
+  }
   subscription: Subscription;
   constructor(
     private cookieService:CookieService,
     private apiService:ApiService,
     private messageService:MessageService,
-    private router:Router
+    private router:Router,
+    private translate:TranslateService
   ) {
+    translate.setDefaultLang('fa');
+    this.lang=this.cookieService.get('lang')
+    if (this.lang=='en'){
+      this.translate.use('en');
+    }else if (this.lang='fa'){
+      this.translate.use('fa');
+    }
     this.subscription = this.messageService.getMessage().subscribe(message => {
       if (message) {
         this.orderList= this.apiService.getOrderItems()
@@ -38,14 +62,14 @@ export class HeaderComponent implements OnInit ,OnDestroy{
    }
   
    ngOnDestroy() {
-    
-    
     // unsubscribe to ensure no memory leaks
     this.subscription.unsubscribe();
 }
 
-
-  
+clearMessages(): void {
+  // clear messages
+  this.messageService.clearMessagesLanguage();
+}
   
   showUserMenu=false
   ngOnInit() {
@@ -57,7 +81,24 @@ export class HeaderComponent implements OnInit ,OnDestroy{
     }
   }
   faUser = faUser;
-
+  faFlag=faFlag;
+ 
+  changeLanguage(lang){
+    if (lang =="english"){
+      this.cookieService.set('language',lang)
+      this.cookieService.set('lang','en')
+      this.cookieService.set('direction','ltr')
+      
+      
+    }else if(lang =="farsi"){
+      this.cookieService.set('language',lang)
+      this.cookieService.set('lang','fa')
+      this.cookieService.set('direction','rtl')
+      
+      
+    }
+    window.location.reload(); 
+  }
   logout(){
 
     this.cookieService.delete('bookstore-token')
