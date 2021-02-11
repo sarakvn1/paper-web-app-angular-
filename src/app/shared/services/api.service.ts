@@ -11,7 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ApiService {
 
-  
+  currentDir:string
   baseUrl='http://localhost:8000/api/books/'
   LoginUrl='http://localhost:8000/'
   reviewUrl='http://localhost:8000/api/bookreviews/reviewList/'
@@ -36,9 +36,24 @@ export class ApiService {
   getBooks(){
     return this.httpClient.get(this.baseUrl,{headers:this.getAuthHeaders()})
   }
+
+  getHomePageBooks(){
+    const body=JSON.stringify({})
+    return this.httpClient.post(`${this.LoginUrl}api/books/homePage/`,body,{headers:this.getAuthHeaders()})
+  }
   getAuthors(){
     
     return this.httpClient.get(`${this.LoginUrl}api/authors/`,{headers:this.getAuthHeaders()})
+  }
+  getAuthorById(id){
+    
+    const authorId=id.toString()
+    return this.httpClient.get(`${this.LoginUrl}api/authors/${authorId}/`,{headers:this.getAuthHeaders()})
+  }
+  getPublisherById(id){
+    
+    const publisherId=id.toString()
+    return this.httpClient.get(`${this.LoginUrl}api/publishers/${publisherId}/`,{headers:this.getAuthHeaders()})
   }
   getPublishers(){
     
@@ -52,8 +67,8 @@ export class ApiService {
     const body=JSON.stringify({publisherId:id})
     return this.httpClient.post(`${this.LoginUrl}api/publishers/bookList/`,body,{headers:this.getAuthHeaders()})
   }
-  getBooksByAuthor(id){
-    const body=JSON.stringify({authorId:id})
+  getBooksByAuthor(authorid){
+    const body=JSON.stringify({authorId:authorid})
     return this.httpClient.post(`${this.LoginUrl}api/authors/bookList/`,body,{headers:this.getAuthHeaders()})
   }
   getEverythingBySearch(searchvalue){
@@ -102,9 +117,12 @@ export class ApiService {
     const dom: any = document.querySelector('body');
     if (direction === 'rtl' && !dom.classList.contains('rtl')) {
       dom.classList.toggle('rtl');
+      this.currentDir="rtl"
     }
     if (direction === 'ltr' && dom.classList.contains('rtl')) {    
       dom.classList.toggle('rtl');
+      this.currentDir="ltr"
+      console.log("this is direction",this.currentDir)
     }        
   }
   getAuthHeaders(){

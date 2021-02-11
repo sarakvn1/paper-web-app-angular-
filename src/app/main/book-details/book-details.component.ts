@@ -30,11 +30,11 @@ export class BookDetailsComponent implements OnInit {
     private translate:TranslateService,
     private cookieService:CookieService
      ) {
-      translate.setDefaultLang('fa');
+      translate.setDefaultLang('en');
       this.lang=this.cookieService.get('lang')
-      if (this.lang=='en'){
+      if (this.lang=='En'){
         this.translate.use('en');
-      }else if (this.lang='fa'){
+      }else if (this.lang='Fa'){
         this.translate.use('fa');
       }
       }
@@ -95,6 +95,7 @@ export class BookDetailsComponent implements OnInit {
     this.apiService.getBookById(this.id).subscribe(
       data=>{
         this.book=data
+        
       },
       error=>console.log(error))
       

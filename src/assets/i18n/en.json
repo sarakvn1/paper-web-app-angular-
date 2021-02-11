@@ -1,6 +1,25 @@
-{
+{   "comma":",",
     "header": {
-        "signIn": "Sign In"
+        "signIn": "Sign In",
+        "aboutUs":"About Us",
+        "books":"Books",
+        "TawaBookStore":"Tawa Book Store",
+        "genres":"Genres",
+        "basket":"Basket",
+        "authors":"Authors",
+        "publishers":"Publishers"
+        
+    },
+    "main":{
+        "popularByGenre":"Popular By Genre",
+        "allGenres":"All Genres",
+        "authorsOfTheWeek":"Authors Of The Week",
+        "booksOfTheYear":"Books Of The Year",
+        "by":"By"
+    }
+    ,
+    "author":{
+        "booksOf":"Books Of"
         
     }
 }

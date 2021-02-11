@@ -6,10 +6,10 @@
     
      <div class="popular-books">
       <div class="main-menu">
-       <div class="genre">{{'main.popularByGenre'|translate}}</div>
-       <div class="book-types" [ngStyle]="{ 'margin-left': this.apiService.currentDir === 'rtl'? 'unset': 'auto','margin-right': this.apiService.currentDir === 'rtl'? 'auto': 'unset'}">
-        <button [ngStyle]="{ 'margin-left': this.apiService.currentDir === 'rtl'? '18px': 'auto'}" (click)="getAllBooks()" class="book-type btn btn-info active"> {{'main.allGenres'|translate}}</button>
-        <button (click)="getGenreBooks(genre.id)" class="book-type btn btn-info" *ngFor="let genre of genres" > {{genre.name}}</button>
+       <div class="genre">{{'author.booksOf' |translate}} <strong>{{author.first_name}} {{author.last_name}} </strong> </div>
+       <div class="book-types">
+        <!-- <a (click)="getAllBooks()" class="book-type active"> All Genres</a>
+        <a (click)="getGenreBooks(genre.id)" class="book-type" *ngFor="let genre of genres" > {{genre.name}}</a> -->
        
        </div>
 
@@ -21,17 +21,17 @@
           <img (click)="bookClicked(book)" src="{{book.image}}" alt="" class="book-card-img">
         <div class="card-content">
             <div class="book-name">{{book.title}}</div>
-            <div class="book-by">{{'main.by'|translate}} 
-              <span *ngFor="let author of book.author">
-                  {{author}}{{'comma'|translate}}
-              </span> </div>
-              <app-rate [bookId]="book.id" ></app-rate>
+                <div class="book-by">{{'main.by'|translate}} 
+                    <span *ngFor="let author of book.author">
+                        {{author}}{{'comma'|translate}}
+                    </span> </div>
+                    <app-rate [bookId]="book.id" ></app-rate>
 
             <div class="book-sum card-sum">Readers of all ages and walks of life have drawn inspiration and empowerment from Elizabeth Gilbert’s books for years. </div>
             <div class="show-details">
-              <button type="button" [routerLink]="['/books', book.id]" class="btn btn-info" data-toggle="modal" data-target="#exampleModalCenter">
-                show details
-             </button>
+                <button type="button" [routerLink]="['/books', book.id]" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                     show details
+                  </button>
                   <button (click)="addToCard(book)" class="btn btn-primary">Add to Cart</button>
 
             </div>

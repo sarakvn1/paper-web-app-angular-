@@ -1,4 +1,11 @@
 
+
+<!-- 
+<app-book-details [book]="this.selectedBook" (updateBook)="selectBook($event)" ></app-book-details>
+<app-home></app-home>
+<app-book-list [books]="books" (selectBook)="selectBook($event)"></app-book-list> -->
+
+
 <div class="book-store">
     <app-header></app-header>
      <div class="book-slide">
@@ -9,7 +16,7 @@
         </div>
         <div class="book-content">
          <div class="book-title">BIG MAGIC</div>
-         <div class="book-author">by Elizabeth Gilbert</div>
+         <div class="book-author">{{'main.by'|translate}} Elizabeth Gilbert</div>
          <div class="rate">
           <fieldset class="rating">
            <input type="checkbox" id="star5" name="rating" value="5" />

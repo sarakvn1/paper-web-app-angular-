@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit ,OnDestroy{
   messages: any[] = [];
   searchResult:any
   lang:string
+  genres:any
   onSearchChange(searchValue: string): void {  
     this.apiService.getEverythingBySearch(searchValue).subscribe(
       data=>{
@@ -38,12 +39,12 @@ export class HeaderComponent implements OnInit ,OnDestroy{
     private router:Router,
     private translate:TranslateService
   ) {
-    translate.setDefaultLang('fa');
+    translate.setDefaultLang('En');
     this.lang=this.cookieService.get('lang')
-    if (this.lang=='en'){
-      this.translate.use('en');
-    }else if (this.lang='fa'){
-      this.translate.use('fa');
+    if (this.lang=='En'){
+      this.translate.use('En');
+    }else if (this.lang='Fa'){
+      this.translate.use('Fa');
     }
     this.subscription = this.messageService.getMessage().subscribe(message => {
       if (message) {
@@ -73,6 +74,11 @@ clearMessages(): void {
   
   showUserMenu=false
   ngOnInit() {
+    this.apiService.getGenres().subscribe(
+      data=>{
+        this.genres=data
+      },
+      error=>console.log(error))
     this.orderList=this.apiService.getOrderItems()
     const bookstoreToken=this.cookieService.get('bookstore-token')
     if (bookstoreToken){
@@ -84,15 +90,15 @@ clearMessages(): void {
   faFlag=faFlag;
  
   changeLanguage(lang){
-    if (lang =="english"){
+    if (lang =="English"){
       this.cookieService.set('language',lang)
-      this.cookieService.set('lang','en')
+      this.cookieService.set('lang','En')
       this.cookieService.set('direction','ltr')
       
       
-    }else if(lang =="farsi"){
+    }else if(lang =="Farsi"){
       this.cookieService.set('language',lang)
-      this.cookieService.set('lang','fa')
+      this.cookieService.set('lang','Fa')
       this.cookieService.set('direction','rtl')
       
       

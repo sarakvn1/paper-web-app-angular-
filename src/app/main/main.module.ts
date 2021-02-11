@@ -17,17 +17,28 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AuthorsComponent } from './authors/authors.component';
+import { BooksComponent } from './authors/books/books.component';
+import { PublishersComponent } from './publishers/publishers.component';
+import { PBooksComponent } from './publishers/p-books/p-books.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { RateComponent } from './rate/rate.component';
 export function HttpLoaderFactory(http: HttpClient) {
 return new TranslateHttpLoader(http);
 }
 
 const routes: Routes = [
-  {path:'home',component:MainComponent},
+  {path:'home',component:HomeComponent},
   {path:'main',component:MainComponent},
   {path:'books',component:BookListComponent},
   {path:'books/:id',component:BookDetailsComponent},
   {path:'profile',component:CustomerProfileComponent},
-  {path:'admin',component:AdminPanelComponent}
+  {path:'admin',component:AdminPanelComponent},
+  {path:'authors',component:AuthorsComponent},
+  {path:'publishers',component:PublishersComponent},
+  {path:'authorsBook/:id',component:BooksComponent},
+  {path:'publishersBook/:id',component:PBooksComponent},
+  {path:'aboutUs',component:AboutUsComponent},
   
 ];
 
@@ -35,7 +46,7 @@ const routes: Routes = [
   declarations: [
     MainComponent,
     BookListComponent, 
-    BookDetailsComponent, HeaderComponent, FooterComponent, PopularBookComponent, HomeComponent, ReviewFormComponent, CustomerProfileComponent, AdminPanelComponent],
+    BookDetailsComponent, HeaderComponent, FooterComponent, PopularBookComponent, HomeComponent, ReviewFormComponent, CustomerProfileComponent, AdminPanelComponent, AuthorsComponent, BooksComponent, PublishersComponent, PBooksComponent, AboutUsComponent, RateComponent],
   imports: [
     ReactiveFormsModule,
     CommonModule,

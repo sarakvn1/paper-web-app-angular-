@@ -1,0 +1,39 @@
+<app-header></app-header>
+<div class="book-store">
+
+       
+    <div class="main-wrapper">
+    
+     <div class="popular-books">
+      <div class="main-menu">
+       <div class="genre">Authors</div>
+       <div class="book-types">
+        <!-- <a (click)="getAllAuthors()" class="book-type active"> All Genres</a>
+        <a (click)="getGenreAuthors(genre.id)" class="book-type" *ngFor="let genre of genres" > {{genre.name}}</a> -->
+       
+       </div>
+
+      </div>
+      <div class="container">
+          <div class="row">
+              <div class="col-6" *ngFor="let author of authors">
+                <div class="author" >
+        
+                    <img src="../../../assets/images/man.png" *ngIf="author.sex=='m'; else female" alt="" class="author-img">
+                    <ng-template #female>
+                      <img src="../../../assets/images/woman.png"  alt="" class="author-img">
+                    </ng-template>
+                  
+                 <div class="author-name">{{author.first_name}} {{author.last_name}}</div>
+                <div>
+                    <button [routerLink]="['/authorsBook',author.id]" class="btn btn-info">see books</button>
+                </div>
+                 
+                </div>
+              </div>
+          </div>
+      </div>
+      
+     </div>
+    </div>
+   </div>

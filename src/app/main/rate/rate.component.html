@@ -1,0 +1,15 @@
+<div class="rate">
+    <fa-icon [icon]="faStar" [ngClass]="{'orange':BookRate>=1}"></fa-icon>
+    <fa-icon [icon]="faStar" [ngClass]="{'orange':BookRate>=2}"></fa-icon>
+    <fa-icon [icon]="faStar" [ngClass]="{'orange':BookRate>=3}"></fa-icon>
+    <fa-icon [icon]="faStar" [ngClass]="{'orange':BookRate>=4}"></fa-icon>
+    <fa-icon [icon]="faStar" [ngClass]="{'orange':BookRate>=5}"></fa-icon>
+    </div>
+    <div class="rate-container">
+      <p>rate this book {{bookId}}</p>
+      <fa-icon [icon]="faStar" (mouseenter)="rateHover(rate)"
+       *ngFor="let rate of [1,2,3,4,5]" 
+       (mouseleave)="rateHovered=0"
+       (click)="rateClicked(rate)"
+       [ngClass]="{'purple':rateHovered >=rate}" ></fa-icon>
+    </div>

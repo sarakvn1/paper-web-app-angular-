@@ -19,16 +19,16 @@ export class BookListComponent implements OnInit {
   selectedBook:null
   lang:string
   constructor(
-    private apiService:ApiService,
+    public apiService:ApiService,
     private messageService:MessageService,
     private translate:TranslateService,
     private cookieService:CookieService
     ) {
-      translate.setDefaultLang('fa');
+      translate.setDefaultLang('en');
     this.lang=this.cookieService.get('lang')
-    if (this.lang=='en'){
+    if (this.lang=='En'){
       this.translate.use('en');
-    }else if (this.lang='fa'){
+    }else if (this.lang='Fa'){
       this.translate.use('fa');
     }
      }

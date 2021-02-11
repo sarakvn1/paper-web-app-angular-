@@ -1,6 +1,25 @@
-{
+{   "comma":"،",
     "header": {
-        "signIn": "وارد شوید"
+        "signIn": "وارد شوید",
+        "aboutUs":"درباره ما",
+        "books":"کتاب ها",
+        "TawaBookStore":"کتاب فروشی تاوا",
+        "genres":"ژانر ها",
+        "basket":"سبد خرید",
+        "authors":"نویسندگان",
+        "publishers":"ناشرها"
+        
+    },
+    "main":{
+        "popularByGenre":"پر طرفدار ترین  کتاب های هر ژانر",
+        "allGenres":"همه ژانرها",
+        "authorsOfTheWeek":"نویسنده هفته",
+        "booksOfTheYear":"کتاب سال",
+        "by":"از"
+    }
+    ,
+    "author":{
+        "booksOf":"کتاب های"
         
     }
 }

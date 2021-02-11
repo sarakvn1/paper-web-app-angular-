@@ -16,16 +16,12 @@ export class MainComponent implements OnInit {
     private router:Router
     
     ) { }
-   books:any=[]
-  Genres:any=[]
-  // selectedBook=null
+   
   ngOnInit() {
 
 
     
     
   }
-  // selectBook(book){
-  //   this.selectedBook=book
-  // }
+  
 }
