@@ -4,88 +4,127 @@
     <a class="navbar-brand" routerLink="/" routerLinkActive="active">{{'header.TawaBookStore'|translate}}</a>
   
     <!-- Links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/books" routerLinkActive="active">{{'header.books'|translate}}</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/authors" routerLinkActive="active">{{'header.authors'|translate}}</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/publishers" routerLinkActive="active">{{'header.publishers'|translate}}</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/aboutUs" routerLinkActive="active" >{{'header.aboutUs' |translate }}</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="#">{{'header.signIn' | translate}}</a>
-      </li>
-
-     <div *ngIf="showUserMenu">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-          <fa-icon [icon]="faUser" ></fa-icon>
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" (click)="logout()" href="#">Log out</a>
-          <a class="dropdown-item" [routerLink]="['/profile']"> my profile</a>
-          <a class="dropdown-item" [routerLink]="['/admin']"> admin</a>
-          
-        </div>
-      </li>
-     </div>
-     
-     <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-        <!-- <fa-icon [icon]="faFlag" ></fa-icon> -->
-        <span> {{lang}} </span>
-      </a>
-      <div class="dropdown-menu">
-        <a class="dropdown-item" (click)="changeLanguage('English')" >
-          English
-        </a>
-        <a class="dropdown-item" (click)="changeLanguage('Farsi')" >
-          Farsi
-        </a>
-        
-      </div>
-    </li>
+    <div class="container">
+      <div class="row">
+        <div class="col-9">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/books" routerLinkActive="active">{{'header.books'|translate}}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/authors" routerLinkActive="active">{{'header.authors'|translate}}</a>
+            </li>
       
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/publishers" routerLinkActive="active">{{'header.publishers'|translate}}</a>
+            </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link" routerLink="/aboutUs" routerLinkActive="active" >{{'header.aboutUs' |translate }}</a>
+            </li> -->
       
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
-            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-          </svg>
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item"  *ngFor="let item of orderList" >
+            <li class="nav-item" *ngIf="signedIn ==false">
+              <a class="nav-link" href="#">{{'header.signIn' | translate}}</a>
+            </li>
+      
+           <div *ngIf="showUserMenu==true">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle"  id="navbardrop" data-toggle="dropdown">
+                <fa-icon [icon]="faUser" ></fa-icon>
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" (click)="logout()" href="#">Log out</a>
+                <a class="dropdown-item" [routerLink]="['/profile']"> my profile</a>
+                <!-- <a class="dropdown-item" [routerLink]="['/admin']"> admin</a> -->
+                
+              </div>
+            </li>
+           </div>
+           
+           <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle"  id="navbardrop" data-toggle="dropdown">
+              <!-- <fa-icon [icon]="faFlag" ></fa-icon> -->
+              <span> {{lang}} </span>
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" (click)="changeLanguage('English')" >
+                English
+              </a>
+              <a class="dropdown-item" (click)="changeLanguage('Farsi')" >
+                Farsi
+              </a>
+              
+            </div>
+          </li>
             
-            {{item.book_id}}-{{item.quantity}}
-          </a>
-          
-        </div>
-      </li>
-      
-      
-  
-      <!-- Dropdown -->
-      <!-- <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-          {{'header.genres'|translate}}
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" *ngFor="let genre of genres">{{genre.name}}</a>
-          
-        </div>
-      </li> -->
+            
+            <li class="nav-item dropdown" >
+              <div>
+                <a class="nav-link dropdown-toggle"  id="navbardrop" data-toggle="dropdown">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                  </svg>
+                </a>
+                <div class="dropdown-menu"  >
+                  <div *ngIf="(orderList.length )==0;then noItem else items ">
 
-      <form  class="form-inline my-2 my-lg-0">
-        <input  (input)="onSearchChange($event.target.value)" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        
-      </form>
-    </ul>
+                  </div>
+                  <ng-template #items>
+                    <a class="dropdown-item"  *ngFor="let item of orderList" >
+                   <fa-icon [icon]="faTrash"  (click)="deleteThisOrderItem(item.book_id)"></fa-icon>
+                   {{item.book_title}}-{{item.quantity}} </a>
+                   <hr>
+                   <div class="row align-items-center  justify-content-center gateway">
+               
+                    <div class="col-4 align-self-center " >
+                        
+                        <button (click)="pay()" class="button" >pay</button>
+                        <!-- <button (click)="pay()" class="btn btn-danger">pay</button> -->
+                      </div>
+                </div>
+                  
+                 </ng-template>
+                 <ng-template #noItem> <a class="dropdown-item"  >
+                  your basket is empty
+                </a> </ng-template>
+                
+              </div>
+              
+              </div>
+              
+              
+            </li>
+            
+            
+            <!-- Dropdown -->
+            <!-- <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                {{'header.genres'|translate}}
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" *ngFor="let genre of genres">{{genre.name}}</a>
+                
+              </div>
+            </li> -->
+            
+            
+          </ul>
+        </div>
+        <div class="col-3" >
+          
+              <form  class="form-inline my-3 my-lg-0" >
+                <input  (input)="onSearchChange($event.target.value)" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                
+              </form>
+            
+        </div>
+      </div>
+    </div>
+    <div >
+      
+    </div>
+    <div > 
+     
+    </div>
+   
   </nav> 
 

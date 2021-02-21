@@ -20,6 +20,7 @@ export class PopularBookComponent implements OnInit {
   genres:any
   selectedBook:null
   lang:string
+  
   constructor(
     public apiService:ApiService,
     private messageService:MessageService,
@@ -27,12 +28,12 @@ export class PopularBookComponent implements OnInit {
     private cookieService:CookieService,
     private router:Router
     ) {
-      translate.setDefaultLang('en');
+      translate.setDefaultLang('En');
     this.lang=this.cookieService.get('lang')
     if (this.lang=='En'){
-      this.translate.use('en');
+      this.translate.use('En');
     }else if (this.lang='Fa'){
-      this.translate.use('fa');
+      this.translate.use('Fa');
     }
      }
     sendMessage(message): void {
@@ -49,18 +50,19 @@ export class PopularBookComponent implements OnInit {
     this.router.navigate(['/authorsBook',authorId]);
 
   }
+  
   ngOnInit(){
     this.apiService.getBooks().subscribe(
       data=>{
         
         this.bookOfYear=data
-        console.log("this is first array of books",data)
+        
       },
       error=>console.log(error))
     this.apiService.getAuthors().subscribe(
       data=>{
         this.authors=data
-        console.log("this is authors",data)
+        
       },
       error=>console.log(error))
     this.apiService.getGenres().subscribe(
@@ -73,7 +75,7 @@ export class PopularBookComponent implements OnInit {
       data=>{
         
         this.books=data['book']
-        console.log("this is first array of books",data)
+        
       },
       error=>console.log(error))
   }
@@ -82,18 +84,17 @@ export class PopularBookComponent implements OnInit {
       data=>{
         
         this.books=data
-        console.log("this is first array of books",data)
+        
       },
       error=>console.log(error))
   }
   getGenreBooks(id){
-    console.log("genres",this.genres)
-    console.log("this is genres",this.genres[id-1]['name'],this.genres[id-1]['listOfBooks'],id)
+    
     this.apiService.getBooksByGenre(id).subscribe(
       data=>{
-        console.log("this is data",data['book'])
+        
         this.books=data['book']
-        console.log("sho books",this.books)
+      
 
       },
       error=>console.log(error)
@@ -103,23 +104,48 @@ export class PopularBookComponent implements OnInit {
     // this.books=this.genres[id]
   }
   addToCard(book){
-
+    
     var today=moment().format();  
      const order={
       book_id:book.id,
+      book_img:book.image,
+      book_title:book.title,
+      book_author:book.author,
+      book_price:book.price,
       quantity:1,
       date:today
     }
-    this.sendMessage("one item added")
-    console.log("this is book id",book.id)
-    console.log(order)
+    // to refresh the header order list
+    
     this.apiService.getOrders(order)
-    this.apiService.senOrderItems().subscribe(
-      data=>{
-        console.log(data)
-        
-      },
-      error=>console.log(error))
+    this.sendMessage("one item added")
+    // to api
+    const cookieExist=this.cookieService.check('factorCode')
+    if (cookieExist ==false){
+      this.apiService.createFactor(10).subscribe(
+        data=>{
+               console.log("send order to api",data['factor'].code)
+               this.cookieService.set('factorCode',JSON.stringify(data['factor'].code))
+               this.apiService.sendOrderItems().subscribe(
+                data=>{
+                  console.log("send order to api",data)
+                  
+                },
+                error=>console.log(error))
+               },
+        error=>console.log(error))
+    }else{
+      const factor=this.cookieService.get('factorCode')
+      console.log("this is my factor --------------",factor)
+      this.apiService.sendOrderItems().subscribe(
+        data=>{
+          console.log("send order to api",data)
+          
+        },
+        error=>console.log(error))
+    }
+    
+   
     
   }
   // bookClicked(book){

@@ -794,3 +794,8 @@ h1 {
   padding: 20px;
  }
 }
+
+.book:after {
+  content: 'flickity';
+  display: none; /* hide :after */
+}

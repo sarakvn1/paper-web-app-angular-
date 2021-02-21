@@ -30,12 +30,12 @@ export class BookDetailsComponent implements OnInit {
     private translate:TranslateService,
     private cookieService:CookieService
      ) {
-      translate.setDefaultLang('en');
+      translate.setDefaultLang('En');
       this.lang=this.cookieService.get('lang')
       if (this.lang=='En'){
         this.translate.use('en');
       }else if (this.lang='Fa'){
-        this.translate.use('fa');
+        this.translate.use('');
       }
       }
 
@@ -106,13 +106,19 @@ export class BookDetailsComponent implements OnInit {
     var today=moment().format();  
      const order={
       book_id:book.id,
+      book_img:book.image,
+      book_title:book.title,
+      book_author:book.author,
+      book_price:book.price,
+      date:today,
+      
       quantity:this.quantityForm.value.quantity,
-      date:today
+      
     }
     this.sendMessage("one item added")
     
     this.apiService.getOrders(order)
-    this.apiService.senOrderItems().subscribe(
+    this.apiService.sendOrderItems().subscribe(
       data=>{
         console.log(data)
         

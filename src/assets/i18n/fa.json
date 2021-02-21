@@ -22,4 +22,23 @@
         "booksOf":"کتاب های"
         
     }
+    ,
+    "profile":{
+        "specification":"مشخصات",
+        "orders":"سفارشات",
+        "detail":"جزییات سفارش",
+        "lastName":"نام خانوادگی",
+        "firstName":"نام",
+        "factorCode":"شماره فاکتور",
+        "date":"تاریخ",
+        "myAddress":"آدرس های من",
+        "payment":"وضعیت پرداخت",
+        "addressName":"نام آدرس",
+        "address":"جزییات آدرس"
+        ,"totalCost":"هزینه نهایی",
+        "unsuccessfull":"پرداخت نشده",
+        "successfull":"موفق",
+        "pay":"پرداخت",
+        "delete":"حذف"
+    }
 }

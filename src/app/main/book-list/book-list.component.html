@@ -8,8 +8,8 @@
       <div class="main-menu">
        <div class="genre">{{'main.popularByGenre'|translate}}</div>
        <div class="book-types" [ngStyle]="{ 'margin-left': this.apiService.currentDir === 'rtl'? 'unset': 'auto','margin-right': this.apiService.currentDir === 'rtl'? 'auto': 'unset'}">
-        <button [ngStyle]="{ 'margin-left': this.apiService.currentDir === 'rtl'? '18px': 'auto'}" (click)="getAllBooks()" class="book-type btn btn-info active"> {{'main.allGenres'|translate}}</button>
-        <button (click)="getGenreBooks(genre.id)" class="book-type btn btn-info" *ngFor="let genre of genres" > {{genre.name}}</button>
+        <a [ngStyle]="{ 'margin-left': this.apiService.currentDir === 'rtl'? '18px': 'auto'}" (click)="getAllBooks()" class="book-type active"> {{'main.allGenres'|translate}}</a>
+        <a (click)="getGenreBooks(genre.id)" class="book-type" *ngFor="let genre of genres" > {{genre.name}}</a>
        
        </div>
 

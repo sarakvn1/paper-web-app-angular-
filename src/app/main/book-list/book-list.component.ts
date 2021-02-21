@@ -12,6 +12,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class BookListComponent implements OnInit {
 
 
+  
   // @Input() books:any;
   // @Output() selectBook=new EventEmitter()
   books:any
@@ -24,12 +25,12 @@ export class BookListComponent implements OnInit {
     private translate:TranslateService,
     private cookieService:CookieService
     ) {
-      translate.setDefaultLang('en');
+      translate.setDefaultLang('En');
     this.lang=this.cookieService.get('lang')
     if (this.lang=='En'){
-      this.translate.use('en');
+      this.translate.use('En');
     }else if (this.lang='Fa'){
-      this.translate.use('fa');
+      this.translate.use('Fa');
     }
      }
     sendMessage(message): void {
@@ -89,14 +90,19 @@ export class BookListComponent implements OnInit {
     var today=moment().format();  
      const order={
       book_id:book.id,
+      book_img:book.image,
+      book_title:book.title,
+      book_author:book.author,
+      book_price:book.price,
       quantity:1,
       date:today
     }
-    this.sendMessage("one item added")
-    console.log("this is book id",book.id)
+    
+   
     console.log(order)
     this.apiService.getOrders(order)
-    this.apiService.senOrderItems().subscribe(
+    this.sendMessage("one item added")
+    this.apiService.sendOrderItems().subscribe(
       data=>{
         console.log(data)
         

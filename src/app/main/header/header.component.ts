@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { faCoffee, faFlag, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faCoffee, faFlag, faTrash, faUser } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ApiService } from 'app/shared/services/api.service';
 import { MessageService } from 'app/shared/services/message.service';
@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit ,OnDestroy{
   searchResult:any
   lang:string
   genres:any
+  signedIn=this.apiService.checkForSignIn()
   onSearchChange(searchValue: string): void {  
     this.apiService.getEverythingBySearch(searchValue).subscribe(
       data=>{
@@ -34,7 +35,7 @@ export class HeaderComponent implements OnInit ,OnDestroy{
   subscription: Subscription;
   constructor(
     private cookieService:CookieService,
-    private apiService:ApiService,
+    public apiService:ApiService,
     private messageService:MessageService,
     private router:Router,
     private translate:TranslateService
@@ -48,7 +49,7 @@ export class HeaderComponent implements OnInit ,OnDestroy{
     }
     this.subscription = this.messageService.getMessage().subscribe(message => {
       if (message) {
-        this.orderList= this.apiService.getOrderItems()
+        this.getAllOrders()
         console.log(message)
         
         // this.messages.push(message);
@@ -72,22 +73,20 @@ clearMessages(): void {
   this.messageService.clearMessagesLanguage();
 }
   
-  showUserMenu=false
+  showUserMenu=this.apiService.checkForSignIn()
   ngOnInit() {
+    // this.cookieService.set('direction','rtl')
     this.apiService.getGenres().subscribe(
       data=>{
         this.genres=data
       },
       error=>console.log(error))
     this.orderList=this.apiService.getOrderItems()
-    const bookstoreToken=this.cookieService.get('bookstore-token')
-    if (bookstoreToken){
-      this.showUserMenu=true
-      console.log(this.showUserMenu)
-    }
+    
   }
   faUser = faUser;
   faFlag=faFlag;
+  faTrash=faTrash;
  
   changeLanguage(lang){
     if (lang =="English"){
@@ -108,11 +107,20 @@ clearMessages(): void {
   logout(){
 
     this.cookieService.delete('bookstore-token')
-    this.router.navigate(['/auth'])
+    this.router.navigate(['/home'])
     
   }
+  pay(){
 
+    
+    this.router.navigate(['/basket'])
+    
+  }
+  deleteThisOrderItem(orderId){
+    this.apiService.deletItemFromOrderList(orderId)
+    this.getAllOrders()
+  }
   getAllOrders=()=>{
-     this.orderList=this.apiService.getOrderItems()
+     this.orderList=JSON.parse(this.cookieService.get('orderlist'))
   }
 }

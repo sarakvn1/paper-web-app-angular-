@@ -1,0 +1,45 @@
+<app-header></app-header>
+<div class="container main">
+    <div class="chooseAddress">
+        choose your address
+        <div class="row">
+            <div class="col-3">
+                <form #f="ngForm" >
+                    <select  name="ads" ngModel>
+                        <option value="" disabled>Choose an address</option>
+                        <option [ngValue]="ads" *ngFor="let ads of address" > {{ads.name}} {{ads.id}} </option>
+            
+                   
+                  </select>
+                </form>
+                
+            </div>
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="col-8">information
+            <br>
+            <p>name: {{f.value['ads'].name}}</p>
+            <p>address: {{f.value['ads'].detail}}</p>
+            <p>postal code: {{f.value['ads'].postalCode}}</p>
+            <p>number: {{f.value['ads'].phoneNumber}}</p>
+        </div>
+        <div class="col-4">
+            <div class="changeAddress">
+                <button (click)="changeAddress()" class="button">change your address</button>
+            </div>
+           <div class="addNewAddress">
+               <button (click)="newAddress()" class="button">add new address</button>
+           </div>
+        </div>
+    </div>
+
+</div>
+<div class="container shipment">
+    <div class="row">
+        <div class="col-4">
+            <button class="button" (click)="send()">continue to pay and choose the way of shipment</button>
+        </div>
+    </div>
+</div>

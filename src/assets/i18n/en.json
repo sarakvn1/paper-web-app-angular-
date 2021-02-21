@@ -21,5 +21,23 @@
     "author":{
         "booksOf":"Books Of"
         
+    },
+    "profile":{
+        "specification":"Specifications",
+        "orders":"Orders",
+        "detail":"Order Details",
+        "lastName":"Last Name",
+        "firstName":"First Name",
+        "factorCode":"Factor Code",
+        "date":"Date",
+        "myAddress":"My Addresses",
+        "payment":"Payment Status",
+        "addressName":"Address Name",
+        "address":"Address Detail"
+        ,"totalCost":"Total Cost",
+        "unsuccessfull":"Unpaid",
+        "successfull":"Successfull",
+        "pay":"Pay"
+        ,"delete":"Delete"
     }
 }

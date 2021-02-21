@@ -1,0 +1,92 @@
+<app-header></app-header>
+<div class="container main">
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-6 timing">
+            <div  class="step">
+                <div class="firstStep">1</div>
+            </div>
+            
+            <div class="deliverToPost">
+               <h4> time of delivering the thing to the post</h4>
+                <hr>
+                <div class="form-check">
+                    <form [formGroup]="shippingDateForm" action="">
+                        <div class="form-check">
+                            <input formControlName="date" class="form-check-input" type="radio" name="date" id="xexampleRadios1" value="2021-01-22T09:57:28-08:00" checked>
+                            <label class="form-check-label" for="xexampleRadios1">
+                                30 february
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input formControlName="date" class="form-check-input" type="radio" name="date" id="xexampleRadios2" value="2021-01-23T09:57:28-08:00">
+                            <label class="form-check-label" for="xexampleRadios2">
+                                29 february
+                            </label>
+                          </div>
+                    </form>
+                  </div>
+                  
+                <p>this is time of delivering to the post, usually after 5 days you recive your thing</p>
+
+            </div>
+            <div class="bill">
+                <div class="row">
+                    <div class="col-8 method">method of sending</div>
+                    <div class="col-4 cost">shipping cost</div>
+                    <div class="col-8">
+                        <div class="form-check">
+                            <form [formGroup]="shippingMethodForm" action="">
+                                <div class="form-check">
+                                    <input formControlName="name" class="form-check-input" type="radio" name="name"  value="75000" >
+                                    <label class="form-check-label" >
+                                       normal post
+                                    </label>
+                                </div>
+                                  <div class="form-check">
+                                    <input formControlName="name" class="form-check-input" type="radio" name="name"  value="85000" checked>
+                                    <label class="form-check-label" >
+                                       pishtaz post
+                                    </label>
+                                  </div>
+                            </form>
+                        
+                      </div>
+                      
+
+                    </div>
+                    <div class="col-4">
+                        <div>7500 t</div>
+                        <div>8500 t</div>
+                    </div>
+                    
+                    
+                </div>
+                <div class="row total">
+                    <div class="col-8 totalCost">
+                        total cost (plus post cost)
+                    </div>
+                    <div class="col-4 finalCost">
+                        {{totalCost}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5 col-lg-5 col-12  pay">
+            <div  class="step">
+                <div class="secondStep">
+                    2
+                </div>
+            </div>
+            <div class="row align-items-center  justify-content-center gateway">
+               
+                <div class="col-4 align-self-center " >
+                    
+                    <button (click)="pay()" class="button" [disabled]="!shippingDateForm.valid || !shippingMethodForm.valid ">pay with all of cards</button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+   
+</div>

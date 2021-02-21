@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'app/shared/services/api.service';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-publishers',
   templateUrl: './publishers.component.html',
@@ -10,7 +10,7 @@ export class PublishersComponent implements OnInit {
 
   publishers:any
   constructor(private apiService:ApiService) { }
-
+  
   ngOnInit() {
     this.apiService.getPublishers().subscribe(
       data=>{

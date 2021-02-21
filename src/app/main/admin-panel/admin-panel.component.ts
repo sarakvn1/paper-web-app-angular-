@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, ElementRef, Inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ApiService } from 'app/shared/services/api.service';
+declare const panel:any
+import { DOCUMENT } from '@angular/common';
 @Component({
   selector: 'app-admin-panel',
   templateUrl: './admin-panel.component.html',
@@ -7,9 +10,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminPanelComponent implements OnInit {
 
-  constructor() { }
+  factors:any
+  constructor(
+    private elementRef: ElementRef,
+    private router:Router,
+    private apiService:ApiService,
+    @Inject(DOCUMENT) private doc: Document,
+  ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    panel()
+    this.apiService.getOrdersFromServerForAdmin().subscribe(
+      data=>{
+        console.log("this is factors",data)
+        this.factors=data
+      
+
+      },
+      error=>console.log(error)
+    )
+    
+  }
+  
+  showOrderDetail(fcode){
+    this.router.navigate(['/detail',fcode])
   }
 
 }

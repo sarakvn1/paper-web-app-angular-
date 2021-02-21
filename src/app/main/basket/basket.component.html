@@ -1,0 +1,98 @@
+<app-header></app-header>
+<div class="container main">
+    
+    <div class="row">
+        <div class="col-12 errorbox" *ngIf="result==2">
+            <div class="error"> sorry, {{errorMessage}}</div>
+        </div>
+        <div class=" col-12 col-md-7 col-lg-8 items">
+            <div class="row book"  *ngFor="let item of books">
+                    <div class="col-1 delete">
+                        <div class="x" (click)="deleteThisOrderItem(item.id)">
+                            <p>x</p>
+                        </div>
+                        
+                    </div>
+                    <div class="col-4 col-md-2 col-lg-2 img ">
+                        <img class="image" src="{{item.image}}" alt="">
+                    </div>
+                    <div class="col-7 col-md-8 content">
+                        <div class="row">
+                            <div class="col-8 col-lg-9 col-md-9 " [ngStyle]="{ 'text-align': this.apiService.currentDir === 'rtl'? 'right': 'left'}">
+                                {{item.title}}{{item.id}}
+                                <br>
+                               by {{item.author}}
+                               <br>
+                                {{item.isbn}}
+                                <br>
+                                quantity: {{item.quantity}}
+                            
+                            </div>
+                            <div class="col-4 col-md-3 col-lg-3">
+                                {{item.price}}
+                            </div>
+                        </div>
+                        </div>
+                
+                
+            </div>
+        </div>
+        <div class="col-12 col-md-5 col-lg-4 info">
+            
+            <div class="discountBox">
+                <div class="row  ">
+                    <p class="discountSec">if you have discount code fill this box</p>
+                    <div class="col-8 discount">
+                        <input type="text" class="form-control form-control-sm" id="inputPassword2" placeholder="discount">
+                    </div>
+                    <div class="col-4 submit">
+                        <button class="submitbutton"> submit</button>
+                    </div>
+                </div>
+                
+                
+            </div>
+            <div class="location">
+                <div class="row">
+                    <div class="col-12 col-md-7 col-lg-6 state">
+                     <div class="s">
+                         choose your state</div>
+                        <form action="" [formGroup]="stateForm">
+                            <select  class="form-control form-control-sm" formControlName="state">
+                                <option>Guilan</option>
+                                <option>Fars</option>
+                                <option>Hamedan</option>
+                            
+                            </select>
+                        </form>     
+                        
+                    </div>
+                    <div class="col-12 col-md-5 col-lg-6 city">
+                        <div class="c">choose your city</div>
+                        <form action="" [formGroup]="cityForm">
+                            <select class="form-control form-control-sm" formControlName="city" >
+                                <option>tehran</option>
+                                <option>shiraz</option>
+                                <option>rasht</option>
+                            
+                            </select>
+                        </form> 
+                            
+                    </div>
+                </div>
+                
+            </div>
+            <div class="totalCost">
+                <div class="row">
+                    <div class="col-12 continue" (click)="continue()">
+                        continue and pay
+                    </div>
+                    <div class="col-12 TCost">
+                        total cost without post Cost
+                        <p>{{totalCost}} toman</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -23,6 +23,15 @@ import { PublishersComponent } from './publishers/publishers.component';
 import { PBooksComponent } from './publishers/p-books/p-books.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { RateComponent } from './rate/rate.component';
+import { DetailsComponent } from './customer-profile/details/details.component';
+import { DetailComponent } from './admin-panel/detail/detail.component';
+import { BasketComponent } from './basket/basket.component';
+import { ProcessAddressComponent } from './basket/process-address/process-address.component';
+import { ProcessInformationComponent } from './basket/process-information/process-information.component';
+import { PayAndSendComponent } from './basket/pay-and-send/pay-and-send.component';
+
+
+
 export function HttpLoaderFactory(http: HttpClient) {
 return new TranslateHttpLoader(http);
 }
@@ -39,15 +48,43 @@ const routes: Routes = [
   {path:'authorsBook/:id',component:BooksComponent},
   {path:'publishersBook/:id',component:PBooksComponent},
   {path:'aboutUs',component:AboutUsComponent},
+  {path:'details/:id',component:DetailsComponent},
+  {path:'detail/:id',component:DetailComponent},
+  {path:'basket',component:BasketComponent},
+  {path:'processAddress',component:ProcessAddressComponent},
+  {path:'processInformation',component:ProcessInformationComponent},
+  {path:'payAndSend',component:PayAndSendComponent},
+ 
   
 ];
 
 @NgModule({
   declarations: [
     MainComponent,
+
     BookListComponent, 
-    BookDetailsComponent, HeaderComponent, FooterComponent, PopularBookComponent, HomeComponent, ReviewFormComponent, CustomerProfileComponent, AdminPanelComponent, AuthorsComponent, BooksComponent, PublishersComponent, PBooksComponent, AboutUsComponent, RateComponent],
+    BookDetailsComponent,
+    HeaderComponent, 
+    FooterComponent,
+    PopularBookComponent, 
+    HomeComponent, 
+    ReviewFormComponent, 
+    CustomerProfileComponent, 
+    AdminPanelComponent, 
+    AuthorsComponent, 
+    BooksComponent, 
+    PublishersComponent, 
+    PBooksComponent, 
+    AboutUsComponent, 
+    RateComponent, 
+    DetailsComponent, 
+    DetailComponent, 
+    BasketComponent, 
+    ProcessAddressComponent, 
+    ProcessInformationComponent, 
+    PayAndSendComponent],
   imports: [
+    
     ReactiveFormsModule,
     CommonModule,
     HttpClientModule,

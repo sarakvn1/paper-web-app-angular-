@@ -1,0 +1,47 @@
+.main{
+    // border: 2px  rgb(36, 36, 68) solid;
+    margin-top: 350px;
+}
+.cost, .method{
+    color: white;
+    border: 2px white solid;
+    background-color: rgb(36, 36, 68);
+}
+.timing ,.pay{
+    margin: 2px;
+    border:2px solid rgb(154, 154, 156) ;
+}
+.total{
+    border:2px white solid ;
+}
+.totalCost,.finalCost{
+    color: white;
+    background-color: rgb(45, 197, 243);
+}
+.paymentGateWay{
+    margin-top: 25px;
+    color: white;
+    border-radius: 25px;
+    background-color: rgb(45, 197, 243);
+}
+.firstStep ,.secondStep{
+    
+    margin: auto;
+    vertical-align: middle;
+    // padding-top:5px ;
+    width: 30px;
+    text-align: center;
+    color: white;
+    background-color: blueviolet;
+    border-radius: 50%;
+}
+.step{
+    margin-top: 10px;
+}
+.gateway{
+    margin-top: 25px;
+    // margin: auto;
+}
+.deliverToPost{
+    margin-top:25px ;
+}

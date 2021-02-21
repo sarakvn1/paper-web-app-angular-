@@ -1,1 +1,24 @@
 @import "./customer-profile.component.css";
+h3{
+    color:white;
+}
+.title{
+    color: white;
+}
+tr{
+   cursor:grab !important; 
+}
+.container{
+    padding-top: 75px;
+}
+.info{
+    display: block !important;
+    color: white;
+}
+hr{
+    background-color: white;
+    color: white !important;
+}
+.table, th{
+    text-align: center !important;
+}

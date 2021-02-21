@@ -1,0 +1,66 @@
+.main{
+    padding-top: 70px;
+    width: 920px;
+    height: 100vh;
+    overflow-y: scroll;
+    background: rgb(41, 40, 41);
+    position: relative;
+}
+.menu{
+    
+    position: sticky;
+    
+    height: 100%;
+    top: 0;
+    color: white;
+    background-color: rgb(10, 10, 10);
+   padding-bottom: 470px;
+}
+.menu a{
+    display: block;
+    width: 100px;
+    height: 50px;
+    line-height: 50px;
+    
+    // padding: 0;
+    padding-right: 20px;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 25px;
+    opacity: 0.6;
+    
+    transition: all 0.22s ease;
+}
+.menu a.active {
+    opacity: 1;
+   
+    cursor: grab;
+  }
+
+  .menu a i {
+    display: block;
+    margin: 0 auto;
+    width: 50px;
+    border-radius: 2px;
+  }
+  .menu a.active i {
+    background: rgba(54,80,209,1);
+    animation: 0.3s ease-out 0s 1 fadeIn;
+  }
+  .menu a:hover {
+    opacity: 1;
+  }
+
+.content{
+   
+    color:white;
+
+}
+.back{
+    cursor:grab
+}
+.col-md-1{
+    flex: 0 0 11.333333%;
+max-width: 11.333333%;
+}
+

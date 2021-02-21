@@ -86,7 +86,7 @@ html, body {
   margin: 0;
   flex-grow: 0;
   flex-shrink: 0;
-  background: var(--drawer);
+  background:  #16191C;
   box-shadow: 1px 0px 3px rgba(0,0,0,0.16), 1px 0px 3px rgba(0,0,0,0.23);
   box-sizing: border-box;
   flex-direction: column;
@@ -98,12 +98,12 @@ html, body {
   display: block;
   position: relative;
   width: 100px;
-  height: 100px;
+  height: 50px;
   line-height: 100px;
   margin: 0;
   padding: 0;
   text-align: center;
-  color: var(--text-primary);
+  color: #FFFFFF;
   font-size: 40px;
   opacity: 0.6;
   box-sizing: border-box;
@@ -131,7 +131,7 @@ html, body {
   margin: 0;
   padding: 0;
   text-align: center;
-  color: var(--text-primary);
+  color: #FFFFFF;
   font-size: 25px;
   opacity: 0.6;
   
@@ -152,7 +152,7 @@ html, body {
 }
 
 .container .drawer .menu a.active i {
-  background: var(--accent-primary);
+  background: rgba(54,80,209,1);
   animation: 0.3s ease-out 0s 1 fadeIn;
 }
 
@@ -160,13 +160,14 @@ html, body {
   opacity: 1;
 }
 
+
 .container .drawer .credits {
   display: block;
   position: relative;
   width: 100px;
   margin: 0;
   padding: 20px 0;
-  color: var(--text-primary);
+  color: #FFFFFF;
   opacity: 0.4;
   text-align: center;
   font-size: 10px;
@@ -179,7 +180,7 @@ html, body {
   width: auto;
   height: 100%;
   flex-grow: 1;
-  background: var(--background-primary);
+  background: #22272B;
   box-sizing: border-box;
   z-index: 1;
 }
@@ -263,7 +264,7 @@ html, body {
   position: relative;
   height: 480px;
   width: 350px;
-  background: var(--background-card);
+  background: #2C343A;
   border-radius: 4px;
   box-sizing: border-box;
   padding: 0 20px;
@@ -295,7 +296,7 @@ html, body {
   text-align: center;
   padding: 0;
   margin: 0;
-  background: var(--accent-primary);
+  background:rgba(54,80,209,1);
   font-size: 1.2em;
 }
 
@@ -327,14 +328,14 @@ html, body {
   width: 15px;
   height: 15px;
   border-radius: 15px;
-  background: var(--status-red);
+  background: #EF4836;
   top: 50%;
   left: 100%;
   transform: translateY(-50%);
 }
 
 .container .content .page .grid .card .head .status.up:after {
-  background: var(--status-green);
+  background:  #36D744;
 }
 
 .container .content .page .grid .card .body {
@@ -357,7 +358,7 @@ html, body {
   line-height: 30px;
   font-size: 12px;
   font-weight: 600;
-  color: var(--text-secondary);
+  color:  #86909A;
 }
 
 .container .content .page .grid .card .body p {
@@ -367,7 +368,7 @@ html, body {
   height: auto;
   margin: -5px 0 0 0;
   padding: 0;
-  color: var(--text-faded);
+  color:  #C3C5C7;
   font-size: 16px;
 }
 
@@ -399,7 +400,7 @@ html, body {
   border-radius: 25px;
   padding: 0;
   margin: 0 20px 0 0;
-  background: var(--background-secondary);
+  background: #374148;
   float: left;
 }
 
@@ -429,7 +430,7 @@ html, body {
   position: relative;
   height: 230px;
   width: 300px;
-  background: var(--background-card);
+  background:  #2C343A;
   border-radius: 4px;
   box-sizing: border-box;
   padding: 20px;
@@ -444,7 +445,7 @@ html, body {
   width: 100%;
   height: 40px;
   line-height: 40px;
-  color: var(--text-secondary);
+  color: #86909A;
   text-transform: uppercase;
   font-weight: 600;
   font-size: 14px;
@@ -457,7 +458,7 @@ html, body {
   height: 60px;
   line-height: 60px;
   margin: 0;
-  color: var(--text-primary);
+  color: #FFFFFF;
   text-transform: uppercase;
   font-weight: 300;
   font-size: 2.3em;
@@ -477,7 +478,7 @@ html, body {
   position: relative;
   height: 60px;
   width: 15px;
-  background: var(--text-secondary);
+  background: #86909A;
   margin: 0 10px 0 0;
   padding: 0;
   float: left;
@@ -490,7 +491,7 @@ html, body {
   left: 0;
   height: 0px;
   width: 15px;
-  background: var(--status-green);
+  background: #36D744;
   padding: 0;
 }
 
@@ -505,8 +506,8 @@ html, body {
   border-radius: 1px;
   text-decoration: none;
   float: right;
-  color: var(--text-primary);
-  background: var(--status-green);
+  color: #FFFFFF;
+  background: #36D744;
   opacity: 0.8;
   transition: all 0.2s ease;
 }
@@ -528,7 +529,7 @@ html, body {
   padding: 0;
   box-sizing: border-box;
   border-radius: 3px;
-  background: var(--background-card);
+  background: #2C343A;
   overflow: hidden;
   transition: all 0.22s ease;
   
@@ -548,7 +549,7 @@ html, body {
 }
 
 .container .content .page .grid .users-table .users-item.header {
-  background: var(--background-secondary);
+  background:  #374148;
   cursor: default;
   user-select: none;
   text-transform: uppercase;
@@ -558,7 +559,7 @@ html, body {
   display: table-cell;
   position: relative;
   height: 50px;
-  color: var(--text-primary);
+  color:  #FFFFFF;
   line-height: 50px;
   padding: 0 10px;
   text-overflow: ellipsis;
@@ -566,7 +567,7 @@ html, body {
 }
 
 .container .content .page .grid .users-table .users-item:hover .table-item {
-  background: var(--background-secondary-faded);
+  background:  rgba(54,80,209,0.5);
 }
 
 .container .content .page .grid .users-table .users-item .table-item.noflex {
@@ -592,8 +593,8 @@ html, body {
   position: relative;
   margin: 5px 0;
   padding: 0 20px;
-  color: var(--text-primary);
-  background: var(--accent-primary);
+  color: #FFFFFF;
+  background: rgba(54,80,209,1);
   height: 40px;
   line-height: 40px;
   text-decoration: none;
@@ -601,8 +602,8 @@ html, body {
 }
 
 .container .content .page .grid .users-table .users-item .user-edit-controls a.table-edit-button:hover {
-  color: var(--text-primary);
-  background: var(--accent-primary-faded);
+  color: #FFFFFF;
+  background:  rgba(54,80,209,0.5);
 }
 
 .container .content .page .grid .user-edit {
@@ -614,7 +615,7 @@ html, body {
   padding: 0;
   box-sizing: border-box;
   border-radius: 3px;
-  background: var(--background-card);
+  background: #2C343A;
   overflow: hidden;
   transition: all 0.22s ease;
   
@@ -639,14 +640,14 @@ html, body {
   margin: 0 20px 0 0;
   box-sizing: border-box;
   text-align: center;
-  background: var(--accent-primary);
+  background:  rgba(54,80,209,1);
 }
 
 .container .content .page .grid .user-edit .header .icon i {
   display: block;
   position: relative;
   line-height: 60px;
-  color: var(--text-primary);
+  color: #FFFFFF;
   font-size: 1.4em;
 }
 
@@ -654,7 +655,7 @@ html, body {
   display: inline-block;
   position: relative;
   float: right;
-  color: var(--text-primary);
+  color: #FFFFFF;
 }
 
 .container .content .page .grid .user-edit .header a.close {
@@ -667,8 +668,8 @@ html, body {
   margin: 0;
   box-sizing: border-box;
   text-align: center;
-  background: var(--accent-primary);
-  color: var(--text-primary);
+  background:  rgba(54,80,209,1);
+  color: #FFFFFF;
 }
 
 .container .content .page .grid.edit-users .users-table {
@@ -695,7 +696,7 @@ html, body {
   position: relative;
   width: 100%;
   min-height: 50px;
-  background: var(--background-secondary);
+  background:#374148;
   border-radius: 2px;
   box-sizing: border-box;
   margin: 0 0 15px 0;
@@ -707,7 +708,7 @@ html, body {
   display: inline-block;
   position: relative;
   float: left;
-  color: var(--text-secondary);
+  color: #86909A;
   margin: 0 10px 0 0;
   padding: 0 20px 0 0;
   text-size: 1.5em;
@@ -725,7 +726,7 @@ html, body {
   width: 1px;
   height: 70%;
   transform: translateY(-50%);
-  background: var(--text-secondary);
+  background: #86909A;
 }
 
 .container .sidebar {
@@ -736,7 +737,7 @@ html, body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background: var(--background-secondary);
+  background: #374148;
   box-shadow: -3px 0px 6px rgba(0,0,0,0.16), -3px 0px 6px rgba(0,0,0,0.23);
   z-index: 2;
   
@@ -771,7 +772,7 @@ html, body {
   padding: 0;
   width: 450px;
   height: 350px;
-  background: var(--background-primary);
+  background: #22272B;
   top: 50%;
   left: 50%;
   box-sizing: border-box;
@@ -795,7 +796,7 @@ html, body {
   top: 0;
   height: 2px;
   width: 100%;
-  background: var(--accent-primary);
+  background: rgba(54,80,209,1);
 }
 
 .container .dialog .dialog-block h2 {
@@ -831,12 +832,12 @@ html, body {
   padding: 0 10px;
   text-decoration: none;
   text-transform: uppercase;
-  color: var(--text-secondary);
+  color: #86909A;
   transition: all 0.22s ease;
 }
 
 .container .dialog .dialog-block .controls .button:first-child {
-  color: var(--text-primary);
+  color: #FFFFFF;
 }
 
 .container .dialog .dialog-block .controls .button:hover {
@@ -845,9 +846,9 @@ html, body {
 
 @keyframes fadeIn {
   0% {
-    background: var(--accent-primary-transparent);
+    background: rgba(54,80,209,0);
   }
   100% {
-    background: var(--accent-primary);
+    background: rgba(54,80,209,1);
   }
 }
