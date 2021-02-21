@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl:'https://tawa-book.herokuapp.com/admin/api/'
+  apiUrl:'https://tawa-book.herokuapp.com/api/'
 };
