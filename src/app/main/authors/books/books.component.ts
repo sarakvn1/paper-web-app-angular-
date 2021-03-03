@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { AddToCardService } from 'app/shared/services/add-to-card.service';
 import { ApiService } from 'app/shared/services/api.service';
 import { MessageService } from 'app/shared/services/message.service';
 import * as moment from 'moment';
@@ -16,6 +18,7 @@ export class BooksComponent implements OnInit {
     private _Activatedroute:ActivatedRoute,
     private apiService:ApiService,
     private messageService:MessageService,
+    private addToCardService:AddToCardService
     ) { }
   books:any
   sendMessage(message): void {
@@ -27,32 +30,22 @@ clearMessages(): void {
     // clear messages
     this.messageService.clearMessages();
 }
-
-  addToCard(book){
-    
-    var today=moment().format();  
-     const order={
-      book_id:book.id,
-      book_img:book.image,
-      book_title:book.title,
-      book_author:book.author,
-      book_price:book.price,
-      quantity:1,
-      date:today
-    }
-    // to refresh the header order list
-    
-    this.apiService.getOrders(order)
-    this.sendMessage("one item added")
-    // to api
-
-    this.apiService.sendOrderItems().subscribe(
-      data=>{
-        console.log("send order to api",data)
-        
-      },
-      error=>console.log(error))
-    
+faStar=faStar
+add(book){
+  var today=moment().format();  
+   const order={
+    book_id:book.id,
+    book_img:book.image,
+    book_title:book.title,
+    book_author:book.author,
+    book_price:book.price,
+    quantity:1,
+    date:today
+  }
+  this.apiService.getOrders(order)
+  this.sendMessage("one item added")
+  this.addToCardService.sendfactorCodeToServer()
+  
   }
   ngOnInit() {
     this.id=this._Activatedroute.snapshot.paramMap.get("id");
@@ -67,7 +60,7 @@ clearMessages(): void {
     this.apiService.getBooksByAuthor(this.id).subscribe(
       data=>{
         this.books=data['book']
-        
+        console.log("authors book",data)
         
       },
       error=>console.log(error))

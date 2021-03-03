@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiService } from 'app/shared/services/api.service';
 
 @Component({
@@ -9,7 +10,9 @@ import { ApiService } from 'app/shared/services/api.service';
 export class AuthorsComponent implements OnInit {
 
   authors:any
-  constructor(private apiService:ApiService) { }
+  constructor(
+    private router:Router,
+    public apiService:ApiService) { }
 
   ngOnInit() {
     this.apiService.getAuthors().subscribe(
@@ -18,6 +21,9 @@ export class AuthorsComponent implements OnInit {
         console.log("this is authors",data)
       },
       error=>console.log(error))
+  }
+  seeBooks(authorId){
+    this.router.navigate(['/authorsBook',authorId])
   }
   getAllAuthors(){}
   getGenreAuthors(genreId){}

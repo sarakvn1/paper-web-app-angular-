@@ -1,5 +1,5 @@
 <app-header></app-header>
-<div class="container main">
+<div class="container main" [ngStyle]="{ 'text-align': this.apiService.currentDir === 'rtl'? 'right': 'left'}">
     <div class="row">
         <div class="col-12 col-md-6 col-lg-6 timing">
             <div  class="step">
@@ -7,45 +7,63 @@
             </div>
             
             <div class="deliverToPost">
-               <h4> time of delivering the thing to the post</h4>
+               <h4> {{'payAndSend.timeOfDelivering' | translate}}</h4>
                 <hr>
                 <div class="form-check">
                     <form [formGroup]="shippingDateForm" action="">
                         <div class="form-check">
-                            <input formControlName="date" class="form-check-input" type="radio" name="date" id="xexampleRadios1" value="2021-01-22T09:57:28-08:00" checked>
-                            <label class="form-check-label" for="xexampleRadios1">
-                                30 february
-                            </label>
+                            <input formControlName="date" class="form-check-input" type="radio" name="date" id="xexampleRadios1" value="{{firstValue}}" checked>
+                            <div *ngIf="this.apiService.currentDir=='rtl';then fa else en"></div>
+                            <ng-template #fa>
+                                <label class="form-check-label" for="xexampleRadios1">
+                                    {{firstj}}
+                                 </label>
+                            </ng-template>
+                            <ng-template #en>
+                                <label class="form-check-label" for="xexampleRadios1">
+                                    {{first}}
+                                 </label>
+                            </ng-template>
+                            
                           </div>
                           <div class="form-check">
-                            <input formControlName="date" class="form-check-input" type="radio" name="date" id="xexampleRadios2" value="2021-01-23T09:57:28-08:00">
-                            <label class="form-check-label" for="xexampleRadios2">
-                                29 february
-                            </label>
+                            <input formControlName="date" class="form-check-input" type="radio" name="date" id="xexampleRadios2" value="{{secondValue}}">
+                            <div *ngIf="this.apiService.currentDir=='rtl';then fas else ens"></div>
+                            <ng-template #fas>
+                                <label class="form-check-label" for="xexampleRadios1">
+                                    {{secondj}}
+                                 </label>
+                            </ng-template>
+                            <ng-template #ens>
+                                <label class="form-check-label" for="xexampleRadios1">
+                                    {{second}}
+                                    
+                                 </label>
+                            </ng-template>
                           </div>
                     </form>
                   </div>
                   
-                <p>this is time of delivering to the post, usually after 5 days you recive your thing</p>
+                <p>{{'payAndSend.willDeliver' | translate}}</p>
 
             </div>
             <div class="bill">
                 <div class="row">
-                    <div class="col-8 method">method of sending</div>
-                    <div class="col-4 cost">shipping cost</div>
+                    <div class="col-8 method">{{'payAndSend.method' | translate}}</div>
+                    <div class="col-4 cost">{{'payAndSend.shippingCost' | translate}}</div>
                     <div class="col-8">
                         <div class="form-check">
                             <form [formGroup]="shippingMethodForm" action="">
                                 <div class="form-check">
                                     <input formControlName="name" class="form-check-input" type="radio" name="name"  value="75000" >
                                     <label class="form-check-label" >
-                                       normal post
+                                        {{'payAndSend.certifiedMail' | translate}}
                                     </label>
                                 </div>
                                   <div class="form-check">
                                     <input formControlName="name" class="form-check-input" type="radio" name="name"  value="85000" checked>
                                     <label class="form-check-label" >
-                                       pishtaz post
+                                        {{'payAndSend.expressMail' | translate}}
                                     </label>
                                   </div>
                             </form>
@@ -55,18 +73,18 @@
 
                     </div>
                     <div class="col-4">
-                        <div>7500 t</div>
-                        <div>8500 t</div>
+                        <div>75000 {{'detail.toman' |translate}}</div>
+                        <div>85000 {{'detail.toman' |translate}}</div>
                     </div>
                     
                     
                 </div>
                 <div class="row total">
                     <div class="col-8 totalCost">
-                        total cost (plus post cost)
+                        {{'payAndSend.totalCostPlus' | translate}}
                     </div>
                     <div class="col-4 finalCost">
-                        {{totalCost}}
+                        {{totalCost}} {{'detail.toman' |translate}}
                     </div>
                 </div>
             </div>
@@ -80,9 +98,9 @@
             </div>
             <div class="row align-items-center  justify-content-center gateway">
                
-                <div class="col-4 align-self-center " >
+                <div class="col-9 align-self-center " >
                     
-                    <button (click)="pay()" class="button" [disabled]="!shippingDateForm.valid || !shippingMethodForm.valid ">pay with all of cards</button>
+                    <button (click)="pay()" class="button expand" [disabled]="!shippingDateForm.valid || !shippingMethodForm.valid "> {{'payAndSend.payWith' | translate}}</button>
                 </div>
             </div>
             

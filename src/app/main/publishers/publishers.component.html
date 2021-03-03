@@ -6,7 +6,7 @@
     
      <div class="popular-books">
       <div class="main-menu">
-       <div class="genre">Publishers</div>
+       <div class="genre">{{'header.publishers'|translate}}</div>
        <div class="book-types">
         <!-- <a (click)="getAllAuthors()" class="book-type active"> All Genres</a>
         <a (click)="getGenreAuthors(genre.id)" class="book-type" *ngFor="let genre of genres" > {{genre.name}}</a> -->
@@ -14,17 +14,18 @@
        </div>
 
       </div>
-      <div class="container">
+      <div class="container" [ngStyle]="{ 'text-align': this.apiService.currentDir === 'rtl'? 'right': 'left'}">
           <div class="row">
-              <div class="col-6" *ngFor="let publisher of publishers">
+              <div class="col-3" *ngFor="let publisher of publishers">
                 <div class="author" >
         
-                    <img src="../../../assets/images/publishers.jpg" alt="" class="author-img">
+                    <img (click)="seeBooks(publisher.id)" src="../../../assets/images/publishers.png" alt="" class="author-img">
                     
                   
-                 <div class="author-name">{{publisher.name}} </div>
-                <div>
-                    <button [routerLink]="['/publishersBook',publisher.id]" class="btn btn-info">see books</button>
+                 <div
+                 [ngStyle]="{ 'padding-right': this.apiService.currentDir === 'rtl'? '50px': '0','padding-left': this.apiService.currentDir === 'rtl'? '0': '25px'}" class="author-name">{{publisher.name}} </div>
+                <div  class="seebook"  [ngStyle]="{ 'padding-right': this.apiService.currentDir === 'rtl'? '20px': '0','padding-left': this.apiService.currentDir === 'rtl'? '0': '10px'}" >
+                    <button [routerLink]="['/publishersBook',publisher.id]" class="button secondary small">{{'author.seebooks'|translate}}</button>
                 </div>
                  
                 </div>

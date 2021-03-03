@@ -1,39 +1,81 @@
 <app-header></app-header>
-<div class="container main">
+<div class="container main" [ngStyle]="{ 'text-align': this.apiService.currentDir === 'rtl'? 'right': 'left'}">
     
     
     <form [formGroup]="addressForm">
         <div class="form-group">
-          <label for="exampleFormControlInput1">first name</label>
+          <label for="exampleFormControlInput1">{{'address.firstName' | translate}}</label>
           <input formControlName="first_name" type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
         </div>
         <div class="form-group">
-            <label for="exampleFormControlInput1">last name</label>
+            <label for="exampleFormControlInput1">{{'address.lastName' | translate}}</label>
             <input formControlName="last_name" type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
           </div>
           <div class="form-group">
-            <label for="exampleFormControlInput1">addressh name </label>
+            <label for="exampleFormControlInput1">{{'address.addressName' | translate}} </label>
             <input formControlName="address_name" type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
           </div>
           <div class="form-group">
-            <label for="exampleFormControlInput1">addressh with house number</label>
+            <label for="exampleFormControlInput1">{{'address.addressDetail' | translate}}</label>
             <input formControlName="detail" type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
           </div>
           <div class="form-group">
-            <label for="exampleFormControlInput1">postal code</label>
+            <label for="exampleFormControlInput1">{{'address.postalCode' | translate}}</label>
             <input formControlName="postalCode" type="email" class="form-control" id="exampleFormControlInput1" placeholder="7185773737">
           </div>
           <div class="form-group">
-            <label for="exampleFormControlInput1">phone number</label>
+            <label for="exampleFormControlInput1">{{'address.phoneNumber' | translate}}</label>
             <input formControlName="phoneNumber" type="email" class="form-control" id="exampleFormControlInput1" placeholder="09111234567">
           </div>
           <div class="form-group">
-            <label for="exampleFormControlInput1">static number</label>
+            <label for="exampleFormControlInput1">{{'address.staticNumber' | translate}}</label>
             <input formControlName="staticNumber" type="email" class="form-control" id="exampleFormControlInput1" placeholder="09111234567">
           </div>
+          <p class="alert alert-danger" *ngIf="addressForm.controls['phoneNumber'].hasError('minlength')">
+            {{'address.phoneNumber' | translate}} {{'address.lessThan11Error' | translate}}
+          </p>
+          <p class="alert alert-danger" *ngIf="addressForm.controls['phoneNumber'].hasError('maxlength')">
+            {{'address.phoneNumber' | translate}}  {{'address.graterThan11Error' | translate}}
+          </p>
+          <p class="alert alert-danger" *ngIf="addressForm.controls['postalCode'].hasError('maxlength')">
+            {{'address.postalCode' | translate}} {{'address.lessThan10Error' | translate}}
+          </p>
+          <p class="alert alert-danger" *ngIf="addressForm.controls['postalCode'].hasError('minlength')">
+            {{'address.postalCode' | translate}}  {{'address.graterThan10Error' | translate}}
+           </p>
+           <p class="alert alert-danger" *ngIf="addressForm.controls['staticNumber'].hasError('maxlength')">
+            {{'address.staticNumber' | translate}} {{'address.graterThan10Error' | translate}}
+          </p>
+            <p class="alert alert-danger" *ngIf="addressForm.controls['staticNumber'].hasError('minlength')">
+              {{'address.staticNumber' | translate}}  {{'address.lessThan10Error' | translate}}
+            </p>
+          <p class="alert alert-danger" *ngIf="addressForm.controls['staticNumber'].hasError('required') ">
+            {{'address.staticNumber' | translate}} {{'address.requiredError' | translate}}
+          </p>
+          <p class="alert alert-danger" *ngIf="addressForm.controls['phoneNumber'].hasError('required') ">
+            {{'address.phoneNumber' | translate}} {{'address.requiredError' | translate}}
+          </p>
+          <p class="alert alert-danger" *ngIf="addressForm.controls['postalCode'].hasError('required') ">
+            {{'address.postalCode' | translate}} {{'address.requiredError' | translate}}
+          </p>
+          <p class="alert alert-danger" *ngIf="addressForm.controls['address_name'].hasError('required') ">
+            {{'address.addressName' | translate}} {{'address.requiredError' | translate}}
+           </p>
+          <p class="alert alert-danger" *ngIf="addressForm.controls['last_name'].hasError('required') ">
+            {{'address.lastName' | translate}} {{'address.requiredError' | translate}}
+          </p>
+          <p class="alert alert-danger" *ngIf="addressForm.controls['first_name'].hasError('required') ">
+            {{'address.firstName' | translate}} {{'address.requiredError' | translate}}
+          </p>
+          <p class="alert alert-danger" *ngIf="addressForm.controls['detail'].hasError('required') ">
+            {{'address.addressDetail' | translate}} {{'address.requiredError' | translate}}
+          </p>
+          <p class="alert alert-danger" *ngIf="addressForm.controls['detail'].hasError('minlength') ">
+            {{'address.addressDetail' | translate}} {{'address.lessThan25Error' | translate}}
+          </p>
           <div class="group">
-            <!-- <button type="submit"  (click)="go()"  class="button" value="submit">submit</button> -->
-            <button type="submit" [disabled]="!addressForm.valid" (click)="go()"  class="button" value="submit">submit</button>
+            <!-- <button type="submit"  (click)="go()"  class="button  small" value="submit">submit</button> -->
+            <button type="submit" [disabled]="!addressForm.valid" (click)="go()"  class="button  small" value="submit">{{'address.submit' | translate}}</button>
         </div>
       </form>
     

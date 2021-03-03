@@ -83,9 +83,10 @@ export class HomeComponent implements OnInit, AfterViewInit{
       this.translate.use('Fa');
     }
    }
- 
+   
   ngOnInit() {
     //
+   
     this.apiService.getBooks().subscribe(
           data=>{
             

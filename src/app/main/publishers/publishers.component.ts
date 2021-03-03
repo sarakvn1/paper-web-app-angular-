@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiService } from 'app/shared/services/api.service';
 import * as moment from 'moment';
 @Component({
@@ -9,7 +10,9 @@ import * as moment from 'moment';
 export class PublishersComponent implements OnInit {
 
   publishers:any
-  constructor(private apiService:ApiService) { }
+  constructor(
+    private router:Router,
+    public apiService:ApiService) { }
   
   ngOnInit() {
     this.apiService.getPublishers().subscribe(
@@ -18,6 +21,9 @@ export class PublishersComponent implements OnInit {
         console.log("this is authors",data)
       },
       error=>console.log(error))
+  }
+  seeBooks(publisherId){
+    this.router.navigate(['/publishersBook',publisherId])
   }
   getAllAuthors(){}
   getGenreAuthors(genreId){}

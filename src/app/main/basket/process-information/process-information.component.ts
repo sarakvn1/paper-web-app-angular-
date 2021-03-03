@@ -38,9 +38,9 @@ export class ProcessInformationComponent implements OnInit {
 
     
   }
-  changeAddress(){
-    this.router.navigate(['/processAddress'])
-  }
+  // changeAddress(id){
+  //   this.router.navigate(['/processAddress',id])
+  // }
   newAddress(){
     this.router.navigate(['/processAddress'])
   }

@@ -13,7 +13,7 @@ return new TranslateHttpLoader(http);
 }
 
 const routes:Routes=[
-  {path:'',pathMatch:'full',redirectTo:'auth'}
+  {path:'',pathMatch:'full',redirectTo:'home'}
   
 ]
 @NgModule({

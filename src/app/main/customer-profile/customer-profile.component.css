@@ -164,7 +164,7 @@ html, body {
 .container .drawer .credits {
   display: block;
   position: relative;
-  width: 100px;
+  /* width: 100px; */
   margin: 0;
   padding: 20px 0;
   color: #FFFFFF;
@@ -193,7 +193,7 @@ html, body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  overflow-x: hidden;
+  overflow-x: scroll;
   overflow-y: scroll;
   flex-direction: column;
   justify-content: space-between;

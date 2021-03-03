@@ -6,7 +6,7 @@
     
      <div class="popular-books">
       <div class="main-menu">
-       <div class="genre">Authors</div>
+       <div class="genre">{{'header.authors'|translate}}</div>
        <div class="book-types">
         <!-- <a (click)="getAllAuthors()" class="book-type active"> All Genres</a>
         <a (click)="getGenreAuthors(genre.id)" class="book-type" *ngFor="let genre of genres" > {{genre.name}}</a> -->
@@ -14,19 +14,25 @@
        </div>
 
       </div>
-      <div class="container">
+      <div class="container" [ngStyle]="{ 'text-align': this.apiService.currentDir === 'rtl'? 'right': 'left'}">
           <div class="row">
-              <div class="col-6" *ngFor="let author of authors">
+              <div class="col-3" *ngFor="let author of authors">
                 <div class="author" >
         
-                    <img src="../../../assets/images/man.png" *ngIf="author.sex=='m'; else female" alt="" class="author-img">
+                    <img (click)="seeBooks(author.id)" src="../../../assets/images/man.png" *ngIf="author.sex=='m'; else female" alt="" class="author-img">
                     <ng-template #female>
                       <img src="../../../assets/images/woman.png"  alt="" class="author-img">
                     </ng-template>
                   
-                 <div class="author-name">{{author.first_name}} {{author.last_name}}</div>
+                 
                 <div>
-                    <button [routerLink]="['/authorsBook',author.id]" class="btn btn-info">see books</button>
+                  <div class="author-name" [ngStyle]="{ 'padding-right': this.apiService.currentDir === 'rtl'? '35px': '0','padding-left': this.apiService.currentDir === 'rtl'? '0': '25px'}">
+                    {{author.first_name}} {{author.last_name}}
+                    
+                  </div>
+                    <div class="seebooks" [ngStyle]="{ 'padding-right': this.apiService.currentDir === 'rtl'? '20px': '0','padding-left': this.apiService.currentDir === 'rtl'? '0': '25px'}">
+                      <button [routerLink]="['/authorsBook',author.id]" class="button secondary small">{{'author.seebooks'|translate}}</button>
+                    </div>
                 </div>
                  
                 </div>

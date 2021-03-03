@@ -1,12 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from 'app/shared/services/api.service';
-import { faCoffee, faStar } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
-  selector: 'app-rate',
-  templateUrl: './rate.component.html',
-  styleUrls: ['./rate.component.scss']
+  selector: 'app-rate-book',
+  templateUrl: './rate-book.component.html',
+  styleUrls: ['./rate-book.component.scss']
 })
-export class RateComponent implements OnInit {
+export class RateBookComponent implements OnInit {
+
   faStar=faStar
   BookRate:any
   book:any
@@ -43,4 +45,5 @@ export class RateComponent implements OnInit {
       error=>console.log(error))
       
   }
+
 }

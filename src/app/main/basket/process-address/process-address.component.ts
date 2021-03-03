@@ -27,22 +27,23 @@ export class ProcessAddressComponent implements OnInit {
       first_name:new FormControl('',[
         Validators.required,
         Validators.minLength(4)]),
-      last_name:new FormControl(''),
+      last_name:new FormControl('',[
+        Validators.required]),
       address_name:new FormControl('',[
         Validators.required,
         Validators.minLength(4)]),
       detail:new FormControl('',[
         Validators.required,
-        Validators.minLength(4)]),
+        Validators.minLength(25)]),
       postalCode:new FormControl('',[
         Validators.required,
-        Validators.minLength(4)]),
+        Validators.maxLength(10),Validators.minLength(10)]),
       phoneNumber:new FormControl('',[
         Validators.required,
-        Validators.minLength(4)]),
+       Validators.maxLength(11),Validators.minLength(11)]),
       staticNumber:new FormControl('',[
         Validators.required,
-        Validators.minLength(4)]),
+        Validators.maxLength(10),Validators.minLength(10)]),
               
       
     }

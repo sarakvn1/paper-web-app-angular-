@@ -2,7 +2,7 @@
   <div class="main-wrapper">
     <div class="books-of">
      <div class="week">
-      <div class="author-title" [ngStyle]="{ 'text-align': this.apiService.currentDir === 'rtl'? 'right': 'left'}">{{'main.authorsOfTheWeek' |translate}}</div>
+      <div class="author-title" [ngStyle]="{ 'text-align': this.apiService.currentDir === 'rtl'? 'right': 'left'}"  >{{'main.authorsOfTheWeek' |translate}}</div>
       
       <div class="author" *ngFor="let author of authors">
         
@@ -11,17 +11,17 @@
             <img src="../../../assets/images/woman.png"  alt="" class="author-img">
           </ng-template>
         
-       <div class="author-name" (click)="goToAuthorsBook(author.id)" >{{author.first_name}} {{author.last_name}}</div>
+       <div [ngStyle]="{ 'margin-right': this.apiService.currentDir === 'rtl'? '10px': '0'}" class="author-name" (click)="goToAuthorsBook(author.id)" >{{author.first_name}} {{author.last_name}}</div>
       </div>
 
       
       
      </div>
      <div class="week year">
-      <div class="author-title" [ngStyle]="{ 'text-align': this.apiService.currentDir === 'rtl'? 'right': 'left'}">{{'main.booksOfTheYear'| translate}}</div>
+      <div class="author-title" [ngStyle]="{ 'text-align': this.apiService.currentDir === 'rtl'? 'right': 'left','margin-right': this.apiService.currentDir === 'rtl'? '10px': '0'}" >{{'main.booksOfTheYear'| translate}}</div>
       <div class="year-book"  *ngFor="let book of bookOfYear">
        <img src="{{book.image}}" alt="" class="year-book-img">
-       <div class="year-book-content">
+       <div class="year-book-content" [ngStyle]="{ 'text-align': this.apiService.currentDir === 'rtl'? 'right': 'left' ,'margin-right': this.apiService.currentDir === 'rtl'? '10px': '0'}">
         <div class="year-book-name">{{book.title}}</div>
         <div class="year-book-author">{{'main.by'|translate}} 
           <span *ngFor="let author of book.author">
@@ -36,9 +36,9 @@
     </div>
     <div class="popular-books">
       <div class="main-menu">
-       <div class="genre">{{'main.popularByGenre'|translate}}</div>
-       <div class="book-types" [ngStyle]="{ 'margin-left': this.apiService.currentDir === 'rtl'? 'unset': 'auto','margin-right': this.apiService.currentDir === 'rtl'? 'auto': 'unset'}">
-        <a [ngStyle]="{ 'margin-left': this.apiService.currentDir === 'rtl'? '18px': 'auto'}" (click)="getAllBooks()" class="book-type  active"> {{'main.allGenres'|translate}}</a>
+       <div class="genre" >{{'main.popularByGenre'|translate}}</div>
+       <div class="book-types" [ngStyle]="{ 'margin-left': this.apiService.currentDir === 'rtl'? 'unset': 'auto','margin-right': this.apiService.currentDir === 'rtl'? 'auto': 'unset'}" >
+        <a  (click)="getAllBooks()"  [ngStyle]="{ 'padding-left': this.apiService.currentDir === 'rtl'? '10px': '0'}"  class="book-type  active"> {{'main.allGenres'|translate}}</a>
         <a (click)="getGenreBooks(genre.id)" class="book-type " *ngFor="let genre of genres" > {{genre.name}}</a>
        
        </div>
@@ -46,7 +46,7 @@
       </div>
       <div class="book-cards">
        <div class="book-card" *ngFor="let book of books">
-        <div class="content-wrapper">
+        <div class="content-wrapper" [ngStyle]="{ 'text-align': this.apiService.currentDir === 'rtl'? 'right': 'left','margin-right': this.apiService.currentDir === 'rtl'? '15px': '0'}">
           <!-- <img (click)="bookClicked(book)" src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F6%2F2019%2F07%2Fchances-are-1-2000.jpg&q=85" alt="" class="book-card-img"> -->
           <img (click)="bookClicked(book)" src="{{book.image}}" alt="" class="book-card-img">
         <div class="card-content">
@@ -55,28 +55,20 @@
               <span *ngFor="let author of book.author">
                   {{author}}{{'comma'|translate}}
               </span> </div>
-                <!-- <div class="rate">
-                <fieldset class="rating book-rate">
-    <input type="checkbox" id="star-c1" name="rating" value="5">
-    <label class="full" for="star-c1"></label>
-    <input type="checkbox" id="star-c2" name="rating" value="4">
-    <label class="full" for="star-c2"></label>
-    <input type="checkbox" id="star-c3" name="rating" value="3">
-    <label class="full" for="star-c3"></label>
-    <input type="checkbox" id="star-c4" name="rating" value="2">
-    <label class="full" for="star-c4"></label>
-    <input type="checkbox" id="star-c5" name="rating" value="1">
-    <label class="full" for="star-c5"></label>
-                </fieldset>
-                <span class="book-voters card-vote">1.987 voters</span>
-            </div> -->
-              <app-rate [bookId]="book.id" ></app-rate>
-            <div class="book-sum card-sum">Readers of all ages and walks of life have drawn inspiration and empowerment from Elizabeth Gilbert’s books for years. </div>
+              <div class="rate">
+                <fa-icon [icon]="faStar" [ngClass]="{'orange':book.avg_ratings>=1}"></fa-icon>
+                <fa-icon [icon]="faStar" [ngClass]="{'orange':book.avg_ratings>=2}"></fa-icon>
+                <fa-icon [icon]="faStar" [ngClass]="{'orange':book.avg_ratings>=3}"></fa-icon>
+                <fa-icon [icon]="faStar" [ngClass]="{'orange':book.avg_ratings>=4}"></fa-icon>
+                <fa-icon [icon]="faStar" [ngClass]="{'orange':book.avg_ratings>=5}"></fa-icon>
+              </div>
+              <!-- <app-rate [bookId]="book.id" ></app-rate> -->
+            <div class="book-sum card-sum">{{book.summary}} </div>
             <div class="show-details">
-              <button type="button" [routerLink]="['/books', book.id]" class="btn btn-info" data-toggle="modal" data-target="#exampleModalCenter">
-                show details
+              <button type="button" [routerLink]="['/books', book.id]" class="button secondary small" data-toggle="modal" data-target="#exampleModalCenter">
+                {{'main.showDetails'|translate}}
              </button>
-                  <button (click)="addToCard(book)" class="btn btn-primary">Add to Cart</button>
+                  <button (click)="add(book)" class="button  small">{{'detail.addToCart'|translate}}</button>
 
             </div>
         </div>

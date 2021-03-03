@@ -8,7 +8,11 @@ h3{
 tr{
    cursor:grab !important; 
 }
+.alert{
+    border-radius: 0;
+}
 .container{
+    max-width: 1200px;
     padding-top: 75px;
 }
 .info{
@@ -21,4 +25,10 @@ hr{
 }
 .table, th{
     text-align: center !important;
+}
+.buttons{
+    padding: 5px;
+}
+.drawer{
+    padding-bottom: 200px;
 }

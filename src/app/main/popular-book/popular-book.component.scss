@@ -16,7 +16,10 @@
  outline: none;
  box-sizing: border-box;
 }
+.orange{
+  color: orangered;
 
+}
 img {
  max-width: 100%;
 }
@@ -408,7 +411,8 @@ h1 {
  width: 100%;
  display: flex;
  flex-grow: 1;
- margin-top: 100px;
+//  margin-top: 100px;
+padding-top: 10px;
  overflow: hidden;
 }
 

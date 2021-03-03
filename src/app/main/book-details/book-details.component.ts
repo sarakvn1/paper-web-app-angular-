@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faCoffee, faStar } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
+import { AddToCardService } from 'app/shared/services/add-to-card.service';
 import { ApiService } from 'app/shared/services/api.service';
 import { MessageService } from 'app/shared/services/message.service';
 import * as moment from 'moment';
@@ -17,7 +18,8 @@ declare const bookDetail:any
 export class BookDetailsComponent implements OnInit {
   book:any
   quantity=1
-  
+  reviews:any
+  reviewLen:number
   // @Input() book;
   @Output() bookAdded=new EventEmitter()
   BookRate=2
@@ -28,7 +30,8 @@ export class BookDetailsComponent implements OnInit {
     private apiService:ApiService,
     private messageService:MessageService,
     private translate:TranslateService,
-    private cookieService:CookieService
+    private cookieService:CookieService,
+    private addToCardService:AddToCardService
      ) {
       translate.setDefaultLang('En');
       this.lang=this.cookieService.get('lang')
@@ -43,7 +46,20 @@ export class BookDetailsComponent implements OnInit {
       // send message to subscribers via observable subject
       this.messageService.sendMessage(message);
   }
+  getAllReviews=()=>{
+    // const bookId=Number(this.id)
 
+    this.apiService.getReviews(this.id).subscribe(
+      data=>{
+        this.reviews=data['result']
+        this.reviewLen=this.reviews.length
+        console.log("len",this.reviewLen)
+        console.log("len",data)
+        console.log("reviews",this.reviews,this.id)
+        
+      },
+      error=>console.log(error))
+  }
   clearMessages(): void {
       // clear messages
       this.messageService.clearMessages();
@@ -52,13 +68,15 @@ export class BookDetailsComponent implements OnInit {
   ngOnInit() {
     // this.sendMessage()
     // bookDetail()
+    
     this.id=this._Activatedroute.snapshot.paramMap.get("id");
 
-    this.apiService.getBookById(this.id).subscribe(
+    this.apiService.getBook(this.id).subscribe(
       data=>{
         this.book=data
       },
       error=>console.log(error))
+      this.getAllReviews()
   }
   plus=(evt)=>{
     this.quantity++
@@ -92,7 +110,7 @@ export class BookDetailsComponent implements OnInit {
     )
   }
   refreshDetail(){
-    this.apiService.getBookById(this.id).subscribe(
+    this.apiService.getBook(this.id).subscribe(
       data=>{
         this.book=data
         
@@ -101,8 +119,8 @@ export class BookDetailsComponent implements OnInit {
       
   }
   refresh=false
-  addToCard(book){
-
+  
+  add(book){
     var today=moment().format();  
      const order={
       book_id:book.id,
@@ -110,20 +128,12 @@ export class BookDetailsComponent implements OnInit {
       book_title:book.title,
       book_author:book.author,
       book_price:book.price,
-      date:today,
-      
-      quantity:this.quantityForm.value.quantity,
-      
+      quantity:1,
+      date:today
     }
-    this.sendMessage("one item added")
-    
     this.apiService.getOrders(order)
-    this.apiService.sendOrderItems().subscribe(
-      data=>{
-        console.log(data)
-        
-      },
-      error=>console.log(error))
+    this.sendMessage("one item added")
+    this.addToCardService.sendfactorCodeToServer()
     
-  }
+    }
 }

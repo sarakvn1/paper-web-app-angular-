@@ -107,8 +107,8 @@
 	vertical-align: -2px;
 }
 .rate {
-    float: left;
-    padding: 0 10px 0 0;
+    /* float: left;
+    padding: 0 10px 0 0; */
 }
 .rate:not(:checked) > input {
     position:absolute;

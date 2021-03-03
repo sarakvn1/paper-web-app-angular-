@@ -7,7 +7,8 @@
         "genres":"Genres",
         "basket":"Basket",
         "authors":"Authors",
-        "publishers":"Publishers"
+        "publishers":"Publishers",
+        "search":"Search"
         
     },
     "main":{
@@ -15,14 +16,24 @@
         "allGenres":"All Genres",
         "authorsOfTheWeek":"Authors Of The Week",
         "booksOfTheYear":"Books Of The Year",
-        "by":"By"
+        "by":"By",
+        "showDetails":"Show Details"
+        
     }
     ,
     "author":{
-        "booksOf":"Books Of"
+        "booksOf":"Books Of",
+        "seebooks":"See Books"
         
     },
     "profile":{
+        "book":"Book Name",
+        "price":"Price",
+        "totalPrice":"Total Cost",
+        "postCost":"Post Cost",
+        "totalPriceWithPost":"Total Cost With Post Cost",
+        "myprofile":"My Profile",
+        "logout":"Log Out",
         "specification":"Specifications",
         "orders":"Orders",
         "detail":"Order Details",
@@ -39,5 +50,90 @@
         "successfull":"Successfull",
         "pay":"Pay"
         ,"delete":"Delete"
+    },
+    "review":{
+        "noReview":"There Is No Review",
+        "reviews":"Reviews",
+        "description":"Details",
+        "submitReview":"Submit Review",
+        "rate":"Rate This Book",
+        "comment":"Review Text"
+
+    },
+    "detail":{
+        "toman":"Toman",
+        "quantity":"Quantity",
+        "addToCart":"Add To Cart"
+       
+       
     }
+    ,
+    "basket":{
+        "discountMessage":"If You Have Discount Code Fill This Box",
+        "discount":"Discount Code",
+        "chooseState":"Chooose State",
+        "chooseCity":"Choose City",
+        "submit":"Submit",
+        "payAndContinue":" Continue And Pay",
+        "stateError":"State Is Required",
+        "cityError":"City Is Required",
+        "totalCost":"Total Cost(without Delivery Cost)"
+        ,"sorry":"Sorry"
+
+    }
+    ,"address":{
+        "state":"State",
+        "city":"City",
+        "firstName":"First Name",
+        "lastName":"Last Name",
+        "postalCode":"Postal Code",
+        "staticNumber":"Static Number",
+        "phoneNumber":"Phone Number",
+        "addressName":"Address Name",
+        "addressDetail":"Address With House Number",
+        "requiredError":"is required",
+        "lessThan10Error":"must be at least 10 characters",
+        "lessThan11Error":"must be at least 11 characters",
+        "lessThan25Error":"must be at least 25 characters",
+        "graterThan10Error":"cannot exceed 10 characters",
+        "graterThan11Error":"cannot exceed 11 characters",
+        "submit":"Submit Address"
+
+    },
+    "payAndSend":{
+        "timeOfDelivering":"Time Of Delivery To The Post office",
+       
+        "willDeliver":"This is the delivery time to the post office. (Express mail will reach you 1 to 5 working days after delivery to the post office.) ",
+        "method":"Method of Delivery",
+        "shippingCost":"Cost Of Delivery",
+        "certifiedMail":"Certified Mail",
+        "expressMail":"Express Mail",
+        "totalCostPlus":"Total Cost (Plus Delivery Cost)",
+        "payWith":"Pay With All Cards"
+
+    },
+    "chooseAddress":{
+        "chAdd":"Choose An Address",
+        "name":"Name",
+        "address":"Address",
+        "postalCode":"Postal Code",
+        "phoneNumber":"Phone Number",
+        "continue":"Continue And Choose The Method Of Delivering",
+        "change":"Change This Address ",
+        "addNew":"Add New Address"
+    },
+    "auth":{
+        "first":"First Name",
+        "last":"Last Name",
+        "email":"Email Address",
+        "password":"Password",
+        "signup":"Sing Up",
+        "signin":"Sign In",
+        "success":"Successfully signed up",
+        "forget":"Forget Password?",
+        "already":"Already Member?",
+        "keepme":"Keep me Signed In",
+        "username":"UserName"
+    }
+
 }

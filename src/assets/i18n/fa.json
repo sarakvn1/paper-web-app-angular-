@@ -7,23 +7,31 @@
         "genres":"ژانر ها",
         "basket":"سبد خرید",
         "authors":"نویسندگان",
-        "publishers":"ناشرها"
-        
+        "publishers":"ناشرها",
+        "search":"جست و جو"
     },
     "main":{
         "popularByGenre":"پر طرفدار ترین  کتاب های هر ژانر",
         "allGenres":"همه ژانرها",
         "authorsOfTheWeek":"نویسنده هفته",
         "booksOfTheYear":"کتاب سال",
-        "by":"از"
+        "by":"از",
+        "showDetails":"نمایش جزییات"
     }
     ,
     "author":{
-        "booksOf":"کتاب های"
-        
+        "booksOf":"کتاب های",
+        "seebooks":"نمایش کتاب ها"
     }
     ,
     "profile":{
+        "book":"نام کتاب",
+        "price":"قیمت",
+        "totalPrice":"هزینه کل",
+        "postCost":"هزینه پست",
+        "totalPriceWithPost":"هزینه نهایی با احتساب هزینه پست",
+        "myprofile":"پروفایل من",
+        "logout":"خروج از حساب کاربری",
         "specification":"مشخصات",
         "orders":"سفارشات",
         "detail":"جزییات سفارش",
@@ -40,5 +48,89 @@
         "successfull":"موفق",
         "pay":"پرداخت",
         "delete":"حذف"
+    },
+    
+    "review":{
+        "noReview":"هیچ نظری وجود ندارد ",
+        "reviews":"نظرات",
+        "description":" جزییات",
+        "submitReview":"ثبت نظر",
+        "rate":"به این کتاب امتیاز دهید",
+        "comment":"متن نظر"
+
+    },
+    "detail":{
+        "toman":"تومان",
+        "quantity":"تعداد",
+        "addToCart":"افزودن به سبد خرید"
+       
+    },
+    "basket":{
+        "discountMessage":"اگر کد تخفیف دارید در قسمت زیر وارد وثبت کنید",
+        "discount":"کد تخفیف",
+        "chooseState":"انتخاب استان",
+        "chooseCity":"انتخاب شهر",
+        "submit":"ثبت",
+        "payAndContinue":" ثبت و تکمیل سفارش",
+        "stateError":"انتخاب استان الزامی است",
+        "cityError":"انتخاب شهر الزامی است",
+        "totalCost":"هزینه نهایی بدون احتساب هزینه پست"
+        ,"sorry":"ببخشید"
+
+    }
+    ,"address":{
+        "state":"استان",
+        "city":"شهر",
+        "firstName":"نام",
+        "lastName":"نام خانوادگی",
+        "postalCode":"کد پستی",
+        "staticNumber":"شماره تلفن ثابت",
+        "phoneNumber":"شماره موبایل",
+        "addressName":" نام آدرس ",
+        "addressDetail":"آدرس دقیق به همراه شماره پلاک",
+        "requiredError":"مورد نیاز است",
+        "lessThan10Error":" شما باید حداقل 10 حرف باشد ",
+        "lessThan11Error":"شما باید حداقل 11 حرف باشد",
+        "lessThan25Error":"شما باید حداقل 25 حرف باشد",
+        "graterThan10Error":"شما باید حداکثر 10 حرف باشد",
+        "graterThan11Error":"شما باید حداکثر 11 حرف باشد",
+        "submit":"ثبت آدرس"
+
+    },
+    "payAndSend":{
+        "timeOfDelivering":"زمان تحویل بسته به اداره پست",
+        
+        "willDeliver":" این زمان تحویل به پست است. (پست پیشتاز ۱ تا ۵ روز کاری بعد از تحویل به پست به دست شما می‌رسد.)",
+        "method":" روش ارسال",
+        "shippingCost":"هزینه ارسال",
+        "certifiedMail":" پست سفارشی",
+        "expressMail":"پست پیشتاز",
+        "totalCostPlus":"هزینه نهایی با احتساب هزینه پست",
+        "payWith":"پرداخت با تمامی کارت های عضو شتاب"
+
+    },
+    "chooseAddress":{
+        "chAdd":"یک آدرس را انتخاب کنید",
+        "name":"نام",
+        "address":" آدرس",
+        "postalCode":"کد پستی",
+        "phoneNumber":"شماره تلفن",
+        "continue":"ادامه و انتخاب روش ارسال",
+        "change":"تغییر این آدرس",
+        "addNew":" افزودن آدرس جدید"
+    }
+    ,
+    "auth":{
+        "first":"نام",
+        "last":"نام خانوادگی",
+        "email":"آدرس ایمیل",
+        "password":"رمز عبور",
+        "signup":"ثبت نام",
+        "signin":"ورود",
+        "success":"با موفقیت ثبت نام شدید",
+        "forget":"رمز خود را فراموش کرده اید؟",
+        "already":"قبلا ثبت نام کرده اید؟",
+        "keepme":"من را وارد نگه دار",
+        "username":"نام کاربری"
     }
 }

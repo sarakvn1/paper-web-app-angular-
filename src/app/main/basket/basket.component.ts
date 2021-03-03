@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AddToCardService } from 'app/shared/services/add-to-card.service';
 import { ApiService } from 'app/shared/services/api.service';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -35,7 +36,8 @@ export class BasketComponent implements OnInit {
   constructor(
     private cookieService:CookieService,
     public apiService:ApiService,
-    private router:Router
+    private router:Router,
+    private addToCardService:AddToCardService
   ) { }
 
   ngOnInit() {
@@ -43,31 +45,40 @@ export class BasketComponent implements OnInit {
   }
     
   continue(){
-    this.cookieService.set('city',JSON.stringify(this.cityForm.value.city))
-    console.log("this is city",this.cityForm.value)
-    console.log("this is city",this.stateForm.value.state)
-    this.cookieService.set('state',JSON.stringify(this.stateForm.value.state))
-    var factorCode=JSON.parse(this.cookieService.get('factorCode'))
-    var factorStatus={"code":factorCode,"verified":true,"payment":false,"send":false,"delivered":false}
-    this.apiService.changeFactorStatus(factorStatus).subscribe(
-      data=>{console.log("++++++++++++++++++",data)
-      this.result=data['result']  
-      this.errorMessage=data['message']
-      if (this.result==1){
-        this.router.navigate(['/processAddress'])
+   
+    const tokenCookieExist=this.cookieService.check('bookstore-token')
+    if (tokenCookieExist){
+     
 
-      }
-    }
-      
-      ,error=>{
-        console.log("thisi is error",error['error'].result)
-        this.result=error['error'].result
-        if (this.result==2){
-          this.errorMessage=error['error'].message
+      this.addToCardService.sendfactorCodeToServer()
+      this.cookieService.set('city',JSON.stringify(this.cityForm.value.city))
+      this.cookieService.set('state',JSON.stringify(this.stateForm.value.state))
+      var factorCode=JSON.parse(this.cookieService.get('factorCode'))
+      var factorStatus={"code":factorCode,"verified":true,"payment":false,"send":false,"delivered":false}
+      console.log('factor status',factorStatus)
+      this.apiService.changeFactorStatus(factorStatus).subscribe(
+        data=>{ console.log("++++++++++++++++++",data)
+                this.result=data['result']  
+                this.errorMessage=data['message']
+                if (this.result==1){
+                  this.router.navigate(['/processAddress'])
+          
+                }
+               }
+        ,error=>{
+                console.log("thisi is error",error);
+            
+                this.result=error['error'].result
+                if (this.result==2){
+                  this.errorMessage=error['error'].message
+                }
         }
-      }
       )
-    
+    }else{
+      this.router.navigate(['/auth']);
+    }
+
+   
   }
   
   deleteThisOrderItem(orderId){

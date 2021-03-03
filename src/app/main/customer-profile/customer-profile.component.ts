@@ -14,7 +14,7 @@ export class CustomerProfileComponent implements OnInit {
   profile:any
   firstName:string
   lastName:string
-
+  address:any
   constructor(
     private elementRef: ElementRef,
     private router:Router,
@@ -41,7 +41,9 @@ export class CustomerProfileComponent implements OnInit {
       data=>{
         // console.log("this is profile",data['result'].first_name)
               this.profile=data['result']
+              this.address=data['result'].address
               console.log("this is profile",data)
+              console.log("address",this.address)
     }
       ,error=>console.log(error)
     )

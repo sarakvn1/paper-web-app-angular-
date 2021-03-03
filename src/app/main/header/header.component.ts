@@ -8,15 +8,19 @@ import { MessageService } from 'app/shared/services/message.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Subscription } from 'rxjs';
 
+
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
+
 export class HeaderComponent implements OnInit ,OnDestroy{
   orderList=[]
   messages: any[] = [];
   searchResult:any
+  
   lang:string
   genres:any
   signedIn=this.apiService.checkForSignIn()
@@ -107,8 +111,8 @@ clearMessages(): void {
   logout(){
 
     this.cookieService.delete('bookstore-token')
-    this.router.navigate(['/home'])
-    
+    window.location.reload();
+   
   }
   pay(){
 

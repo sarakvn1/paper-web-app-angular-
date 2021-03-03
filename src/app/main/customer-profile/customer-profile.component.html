@@ -9,7 +9,7 @@
       <!-- <a data-menu="download" ><i class="icon ion-code-download"></i></a> -->
       <a data-menu="about" ><i class="icon ion-information-circled"></i></a>
     </div>
-    <span class="credits">uplusion23</span>
+    
   </div>
   <div class="content">
     <div class="page active" data-page="dashboard">
@@ -58,9 +58,9 @@
               </td>
             <td>{{factor.TotalCostWithPost}}</td>
             <td>
-              <button class="button"> {{'profile.pay' |translate}}</button>
+              <div class="buttons"><button class="button  small"> {{'profile.pay' |translate}}</button></div>
               
-              <button class="alert button"> {{'profile.delete' |translate}}</button>
+              <div class="buttons"><button class="button alert tiny "> {{'profile.delete' |translate}}</button></div>
               </td>
           </tr>
           <!-- <tr>
@@ -115,49 +115,51 @@
         </div>
       </div>
     </div> -->
-    <div class="page noflex" data-page="about">
+    <div class="page noflex" data-page="about" [ngStyle]="{ 'text-align': this.apiService.currentDir === 'rtl'? 'right': 'left'}">
       <div class="header">
         <div class="title">
-          <h2>About</h2>
+          <h2> {{'profile.myAddress' |translate}}</h2>
         </div>
       </div>
       <div class="info-container">
-        <div class="info">
-          <h1>
-            {{'profile.myaddress' |translate}}
-          </h1>
-        </div>
-        <table class="table">
+        
+        <div class="row">
+          <div class="col-12">
+            <table class="table table-sm table-hover">
             
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col"> {{'profile.addressName' |translate}}</th>
-              <th scope="col"> {{'profile.address' |translate}}</th>
-             
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              
-            </tr>
-            <!-- <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-            </tr> -->
-          </tbody>
-        </table>
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col"> {{'profile.addressName' |translate}}</th>
+                  <th scope="col"> {{'profile.address' |translate}}</th>
+                  <th scope="col"> {{'address.city' |translate}}</th>
+                  <th scope="col"> {{'address.state' |translate}}</th>
+                  <th scope="col"> {{'address.postalCode' |translate}}</th>
+                  <th scope="col"> {{'address.phoneNumber' |translate}}</th>
+                  <th scope="col"> </th>
+                 
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let addr of address;index as i">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{addr.name}}</td>
+                  <td>{{addr.detail}}</td>
+                  <td>{{addr.city}}</td>
+                  <td>{{addr.state}}</td>
+                  <td>{{addr.postalCode}}</td>
+                  <td>{{addr.phoneNumber}}</td>
+                  <td>
+                    <div class="buttons"><button class="button  small"> {{'chooseAddress.change' |translate}}</button></div>
+                    
+                    <div class="buttons"><button class="button alert tiny "> {{'profile.delete' |translate}}</button></div>
+                    </td>
+                </tr>
+               
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -168,8 +170,8 @@
     <div class="dialog-block">
       <h2>Are you sure you want to logout?</h2>
       <div class="controls">
-        <a  class="button">Logout</a>
-        <a data-dialog-action="cancel"  class="button">Cancel</a>
+        <a  class="button  small">Logout</a>
+        <a data-dialog-action="cancel"  class="button  small">Cancel</a>
       </div>
     </div>
   </div> -->

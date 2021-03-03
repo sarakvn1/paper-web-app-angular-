@@ -407,7 +407,9 @@ h1 {
  width: 100%;
  display: flex;
  flex-grow: 1;
- margin-top: 100px;
+//  margin-top: 70px;
+ padding-top: 70px;
+ background: #d1d3d6;
  overflow: hidden;
 }
 
@@ -503,7 +505,13 @@ h1 {
   margin-bottom: 40px;
  }
 }
-
+.author{
+  padding-top: 15px;
+  cursor: grab;
+}
+.seebooks{
+  padding-top: 5px;
+}
 .author-title {
  padding: 0 0 20px;
  font-weight: 500;

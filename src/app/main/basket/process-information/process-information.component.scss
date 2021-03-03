@@ -1,8 +1,18 @@
 .main{
+    background-color: rgb(217, 223, 233);
     margin-top: 250px;
-    border: 2px solid black;
+    border: 2px solid rgb(15, 67, 83);
 }
 .shipment{
     margin-top: 35px;
     
+}
+.alert{
+    border-radius: 0;
+}
+.choose{
+    padding: 25px 0 35px 0;
+}
+.buttons{
+    padding-top: 10px;
 }

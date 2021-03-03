@@ -1,44 +1,51 @@
-<div class="review-heading">REVIEWS</div>
-              <p class="mb-20">There are no reviews yet.</p>
+<div class="review-heading" ></div>
+              <div *ngIf="reviews.length==0;then noReview else showReview">
+
+              </div>
+              <ng-template #noReview>
+                <p class="mb-20">{{'review.noReview'|translate}}</p>
+              </ng-template>
+              <ng-template #showReview>
+
+              </ng-template>
+              
               <div *ngFor="let review of reviews">
-                  <h3>{{review.review_title}}</h3>
+                  <strong> {{review.username}} </strong>
+                  <p> {{review.content}} </p>
               </div>
               <form [formGroup]="reviewForm" class="review-form" (ngSubmit)="saveReview()">
                 <div class="form-group">
-                  <label>Your rating</label>
-                  <div class="reviews-counter">
-                    <div class="rate">
-                      <input type="radio" id="star5" name="rate" value="5" />
-                      <label for="star5" title="text">5 stars</label>
-                      <input type="radio" id="star4" name="rate" value="4" />
-                      <label for="star4" title="text">4 stars</label>
-                      <input type="radio" id="star3" name="rate" value="3" />
-                      <label for="star3" title="text">3 stars</label>
-                      <input type="radio" id="star2" name="rate" value="2" />
-                      <label for="star2" title="text">2 stars</label>
-                      <input type="radio" id="star1" name="rate" value="1" />
-                      <label for="star1" title="text">1 star</label>
-                    </div>
-                  </div>
+                  
+    
                 </div>
 
                 <div class="form-group">
-                    <label>Your message</label>
-                    <textarea formControlName="title" class="form-control" rows="10"></textarea>
+                    <label>{{'review.comment'|translate}}</label>
+                    <textarea formControlName="content" class="form-control" rows="10"></textarea>
                 </div>
 
                 <div class="row">
-                  <div class="col-md-6">
+                  <!-- <div class="col-md-6">
                     <div class="form-group">
                       <input formControlName="email" type="text" name="" class="form-control" placeholder="Name*">
                     </div>
-                  </div>
+                  </div> -->
 
-                  <div class="col-md-6">
+                  <!-- <div class="col-md-6">
                     <div class="form-group">
                       <input  formControlName="description" type="text" name="" class="form-control" placeholder="Email Id*">
                     </div>
-                  </div>
+                  </div> -->
+                  
                 </div>
-                <button type="submit" (click)="submitReview()" class="round-black-btn">Submit Review</button>
+               
+                
               </form>
+              <div class="row">
+                <div class="col-6">
+                  <app-rate-book [bookId]="BookId" ></app-rate-book>
+                </div>
+                <div class="col-6">
+                  <button type="submit" [disabled]="!reviewForm.valid" (click)="submitReview()" class="button secondary">{{'review.submitReview'|translate}}</button>
+                </div>
+              </div>

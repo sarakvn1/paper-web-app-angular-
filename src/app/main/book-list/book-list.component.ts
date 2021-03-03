@@ -1,5 +1,7 @@
 import { Component, OnInit,Input,EventEmitter,Output } from '@angular/core';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
+import { AddToCardService } from 'app/shared/services/add-to-card.service';
 import { ApiService } from 'app/shared/services/api.service';
 import { MessageService } from 'app/shared/services/message.service';
 import * as moment from 'moment';
@@ -12,7 +14,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class BookListComponent implements OnInit {
 
 
-  
+  faStar=faStar
   // @Input() books:any;
   // @Output() selectBook=new EventEmitter()
   books:any
@@ -23,7 +25,8 @@ export class BookListComponent implements OnInit {
     public apiService:ApiService,
     private messageService:MessageService,
     private translate:TranslateService,
-    private cookieService:CookieService
+    private cookieService:CookieService,
+    private addToCardService:AddToCardService
     ) {
       translate.setDefaultLang('En');
     this.lang=this.cookieService.get('lang')
@@ -85,8 +88,7 @@ export class BookListComponent implements OnInit {
     // console.log("books",this.books)
     // this.books=this.genres[id]
   }
-  addToCard(book){
-
+  add(book){
     var today=moment().format();  
      const order={
       book_id:book.id,
@@ -97,19 +99,11 @@ export class BookListComponent implements OnInit {
       quantity:1,
       date:today
     }
-    
-   
-    console.log(order)
     this.apiService.getOrders(order)
     this.sendMessage("one item added")
-    this.apiService.sendOrderItems().subscribe(
-      data=>{
-        console.log(data)
-        
-      },
-      error=>console.log(error))
+    this.addToCardService.sendfactorCodeToServer()
     
-  }
+    }
   // bookClicked(book){
   //   this.selectBook.emit(book)
   // }

@@ -1,5 +1,7 @@
 import { Component, OnInit ,Input} from '@angular/core';
-import {FormGroup,FormControl} from '@angular/forms'
+import {FormGroup,FormControl, Validators} from '@angular/forms'
+import { ActivatedRoute } from '@angular/router';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from 'app/shared/services/api.service';
 @Component({
   selector: 'app-review-form',
@@ -8,23 +10,28 @@ import { ApiService } from 'app/shared/services/api.service';
 })
 export class ReviewFormComponent implements OnInit {
 
-  constructor(private apiService:ApiService) { }
+  constructor(
+    private _Activatedroute:ActivatedRoute,
+    private apiService:ApiService) { }
   @Input() BookId
+
   reviews=[]
   reviewForm=new FormGroup(
     {
-      title:new FormControl(''),
-      email:new FormControl(''),
-      description:new FormControl('')
+      content:new FormControl('',[
+        Validators.required])
+     
     }
   )
   ngOnInit() {
+    // this.id=this._Activatedroute.snapshot.paramMap.get("id");
     this.getAllReviews()
   }
   
   submitReview(){
     
   }
+  faStar=faStar
   saveReview(){
     const bookId=Number(this.BookId)
     this.apiService.writeReview(this.reviewForm.value.title,this.reviewForm.value.description,bookId).subscribe(
@@ -38,7 +45,7 @@ export class ReviewFormComponent implements OnInit {
     this.apiService.getReviews(bookId).subscribe(
       data=>{
         this.reviews=data['result']
-        console.log(this.reviews)
+        console.log('reviewssss',this.reviews,bookId)
       },
       error=>console.log(error))
   }

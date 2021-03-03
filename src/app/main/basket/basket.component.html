@@ -3,9 +3,9 @@
     
     <div class="row">
         <div class="col-12 errorbox" *ngIf="result==2">
-            <div class="error"> sorry, {{errorMessage}}</div>
+            <div class="error"> {{'basket.sorry' | translate}}, {{errorMessage}}</div>
         </div>
-        <div class=" col-12 col-md-7 col-lg-8 items">
+        <div class=" col-12 col-md-6 col-lg-7 items">
             <div class="row book"  *ngFor="let item of books">
                     <div class="col-1 delete">
                         <div class="x" (click)="deleteThisOrderItem(item.id)">
@@ -19,13 +19,13 @@
                     <div class="col-7 col-md-8 content">
                         <div class="row">
                             <div class="col-8 col-lg-9 col-md-9 " [ngStyle]="{ 'text-align': this.apiService.currentDir === 'rtl'? 'right': 'left'}">
-                                {{item.title}}{{item.id}}
+                                {{item.title}}
                                 <br>
-                               by {{item.author}}
+                                <strong>{{'main.by'|translate}}</strong>  {{item.author}}
                                <br>
-                                {{item.isbn}}
+                               
                                 <br>
-                                quantity: {{item.quantity}}
+                                {{'detail.quantity'|translate}}: {{item.quantity}}
                             
                             </div>
                             <div class="col-4 col-md-3 col-lg-3">
@@ -37,26 +37,26 @@
                 
             </div>
         </div>
-        <div class="col-12 col-md-5 col-lg-4 info">
+        <div class="col-12 col-md-6 col-lg-5 info">
             
-            <div class="discountBox">
+            <div class="discountBox" [ngStyle]="{ 'direction': this.apiService.currentDir === 'rtl'? 'ltr': 'ltr'}">
                 <div class="row  ">
-                    <p class="discountSec">if you have discount code fill this box</p>
-                    <div class="col-8 discount">
-                        <input type="text" class="form-control form-control-sm" id="inputPassword2" placeholder="discount">
+                    <p class="discountSec">{{'basket.discountMessage' | translate}}</p>
+                    <div class="col-10 discount">
+                        <input type="text" class="form-control form-control-sm" id="inputPassword2" placeholder="{{'basket.discount' | translate}}">
                     </div>
-                    <div class="col-4 submit">
-                        <button class="submitbutton"> submit</button>
+                    <div class="col-2 submit">
+                        <button class="submitbutton">  {{'basket.submit' | translate}}</button>
                     </div>
                 </div>
                 
                 
             </div>
-            <div class="location">
+            <div class="location" [ngStyle]="{ 'text-align': this.apiService.currentDir === 'rtl'? 'right': 'left'}">
                 <div class="row">
                     <div class="col-12 col-md-7 col-lg-6 state">
                      <div class="s">
-                         choose your state</div>
+                        {{'basket.chooseState' | translate}}</div>
                         <form action="" [formGroup]="stateForm">
                             <select  class="form-control form-control-sm" formControlName="state">
                                 <option>Guilan</option>
@@ -68,12 +68,12 @@
                         
                     </div>
                     <div class="col-12 col-md-5 col-lg-6 city">
-                        <div class="c">choose your city</div>
+                        <div class="c"> {{'basket.chooseCity' | translate}}</div>
                         <form action="" [formGroup]="cityForm">
                             <select class="form-control form-control-sm" formControlName="city" >
-                                <option>tehran</option>
-                                <option>shiraz</option>
-                                <option>rasht</option>
+                                <option>Tehran</option>
+                                <option>Shiraz</option>
+                                <option>Rasht</option>
                             
                             </select>
                         </form> 
@@ -83,16 +83,26 @@
                 
             </div>
             <div class="totalCost">
+                
                 <div class="row">
-                    <div class="col-12 continue" (click)="continue()">
-                        continue and pay
+                    <!-- <div class="col-12 continue" >
+                        <button (click)="continue()" [disabled]="!cityForm.valid || !stateForm.valid " class="button small"> {{'basket.payAndContinue' | translate}}</button>
+                    </div> -->
+                    <div class="col-12 continue" (click)="continue()" [ngClass]="{'disableDiv': !cityForm.valid || !stateForm.valid}">
+                         {{'basket.payAndContinue' | translate }}
                     </div>
                     <div class="col-12 TCost">
-                        total cost without post Cost
-                        <p>{{totalCost}} toman</p>
+                        {{'basket.totalCost' | translate}}
+                        <p>{{totalCost}} {{'detail.toman'|translate}}</p>
                     </div>
                 </div>
             </div>
+            <p class="alert alert-danger" *ngIf="cityForm.controls['city'].hasError('required') ">
+                {{'basket.cityError' | translate}}
+              </p>
+              <p class="alert alert-danger" *ngIf="stateForm.controls['state'].hasError('required') ">
+                {{'basket.stateError' | translate}}
+              </p>
         </div>
     </div>
 </div>

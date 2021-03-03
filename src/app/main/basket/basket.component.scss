@@ -8,9 +8,7 @@
     border: 5px white solid;
     background: rgb(220, 231, 231);
 }
-.content{
-    // background: darkcyan;
-}
+
 .submitbutton{
     display: inline-block;
     text-align: center;
@@ -24,7 +22,7 @@
     padding: 2px;
     // margin: 2rem;
     font-size: .9rem;
-    background-color: #2199e8;
+    background-color:rgb(33, 153, 232);
     color: #fefefe;
 
 }
@@ -42,12 +40,17 @@
 .submit{
     padding-left: 4px;
 }
+
 .continue{
     color: white;
     text-align: center;
-    padding: 2px 0 1px 0;
+    padding: 0;
     cursor: pointer;
-    background-color: rgb(41, 115, 211);
+    background-color: rgb(33, 153, 232);
+}
+.disableDiv{
+    opacity: .25;
+    pointer-events: none;
 }
 .x{
     height: 25px;

@@ -16,18 +16,68 @@ export class ApiService {
   baseUrl='https://tawabook.herokuapp.com/api/books/'
   LoginUrl='https://tawabook.herokuapp.com/'
   reviewUrl='https://tawabook.herokuapp.com/api/bookreviews/reviewList/'
-  // baseUrl='http://localhost:8000/api/books/'
-  // LoginUrl='http://localhost:8000/'
-  // reviewUrl='http://localhost:8000/api/books/api/bookreviews/reviewList/'
-  // private Genres=['Business','Biography','Fiction','Philosoph','Science',]
+  
   messages: any[] = [];
   subscription: Subscription;
   cookieExist:boolean
   language:any
   headers=new HttpHeaders({
     'Content-Type':'application/json',
-     
+    
   })
+  getHeaders(){
+    
+    const directionExist=this.cookieService.check('direction')
+    if(directionExist){
+      const direction=this.cookieService.get('direction')
+      this.changeLang(direction)
+    }else{
+      this.changeLang("rtl")
+    }
+    
+    const languageExist=this.cookieService.check('language')
+    if (languageExist){
+       this.language=this.cookieService.get('language')
+    }else{
+       this.language="Fa"
+    }
+    var headers=new HttpHeaders({
+      'Content-Type':'application/json',
+      'Accept-Language':this.language
+    })
+
+    return headers
+  }
+  getAuthHeaders(){
+
+    const languageExist=this.cookieService.check('language')
+    if (languageExist){
+       this.language=this.cookieService.get('language')
+    }else{
+       this.language="English"
+    }
+    
+    const direction=this.cookieService.get('direction')
+    this.changeLang(direction)
+    console.log("this is direction",direction)
+    console.log("this is lang cookie",this.language)
+    const token=this.cookieService.get('bookstore-token')
+    const tokeExist=this.cookieService.check('bookstore-token')
+    if (tokeExist){
+      return new HttpHeaders({
+        'Content-Type':'application/json',
+        'Accept-Language':this.language,
+        Authorization:`Token ${token}` 
+        
+      })
+    }else{
+    return new HttpHeaders({
+      'Content-Type':'application/json',
+      'Accept-Language':this.language
+       
+      
+    })}
+  }
   constructor(
     private httpClient:HttpClient,
     private cookieService:CookieService,
@@ -41,52 +91,58 @@ export class ApiService {
     console.log("this cookie exist???",this.cookieService.check('bookstore-token'))
     return this.cookieExist=this.cookieService.check('bookstore-token')
   }
+
+
+  
   getBooks(){
-    return this.httpClient.get(this.baseUrl,{headers:this.getAuthHeaders()})
+    return this.httpClient.get(this.baseUrl,{headers:this.getHeaders()})
   }
+
+
+
 
   getHomePageBooks(){
     const body=JSON.stringify({})
-    return this.httpClient.post(`${this.LoginUrl}api/books/homePage/`,body,{headers:this.getAuthHeaders()})
+    return this.httpClient.post(`${this.LoginUrl}api/books/homePage/`,body,{headers:this.getHeaders()})
   }
   getAuthors(){
     
-    return this.httpClient.get(`${this.LoginUrl}api/authors/`,{headers:this.getAuthHeaders()})
+    return this.httpClient.get(`${this.LoginUrl}api/authors/`,{headers:this.getHeaders()})
   }
   getAuthorById(id){
     
     const authorId=id.toString()
-    return this.httpClient.get(`${this.LoginUrl}api/authors/${authorId}/`,{headers:this.getAuthHeaders()})
+    return this.httpClient.get(`${this.LoginUrl}api/authors/${authorId}/`,{headers:this.getHeaders()})
   }
   getPublisherById(id){
     
     const publisherId=id.toString()
-    return this.httpClient.get(`${this.LoginUrl}api/publishers/${publisherId}/`,{headers:this.getAuthHeaders()})
+    return this.httpClient.get(`${this.LoginUrl}api/publishers/${publisherId}/`,{headers:this.getHeaders()})
   }
   getPublishers(){
     
-    return this.httpClient.get(`${this.LoginUrl}api/publishers/`,{headers:this.getAuthHeaders()})
+    return this.httpClient.get(`${this.LoginUrl}api/publishers/`,{headers:this.getHeaders()})
   }
   getBooksByGenre(id){
     const body=JSON.stringify({genreId:id})
-    return this.httpClient.post(`${this.LoginUrl}api/genres/bookList/`,body,{headers:this.getAuthHeaders()})
+    return this.httpClient.post(`${this.LoginUrl}api/genres/bookList/`,body,{headers:this.getHeaders()})
   }
   getBooksByPublisher(id){
     const body=JSON.stringify({publisherId:id})
-    return this.httpClient.post(`${this.LoginUrl}api/publishers/bookList/`,body,{headers:this.getAuthHeaders()})
+    return this.httpClient.post(`${this.LoginUrl}api/publishers/bookList/`,body,{headers:this.getHeaders()})
   }
   getBooksByAuthor(authorid){
     const body=JSON.stringify({authorId:authorid})
-    return this.httpClient.post(`${this.LoginUrl}api/authors/bookList/`,body,{headers:this.getAuthHeaders()})
+    return this.httpClient.post(`${this.LoginUrl}api/authors/bookList/`,body,{headers:this.getHeaders()})
   }
   getEverythingBySearch(searchvalue){
     const body=JSON.stringify({search:searchvalue})
-    return this.httpClient.post(`${this.baseUrl}search_book/`,body,{headers:this.getAuthHeaders()})
+    return this.httpClient.post(`${this.baseUrl}search_book/`,body,{headers:this.getHeaders()})
   }
 
   getBook(id){
     const bookid=id.toString()
-    return this.httpClient.get(`${this.baseUrl}${bookid}/`,{headers:this.getAuthHeaders()})
+    return this.httpClient.get(`${this.baseUrl}${bookid}/`,{headers:this.getHeaders()})
   }
   rateBook(rate:number,bookId:number){
     const body=JSON.stringify({stars:rate})
@@ -104,7 +160,7 @@ export class ApiService {
   }
   getGenres(){
     // const bookid=id.toString()
-    return this.httpClient.get(`${this.LoginUrl}api/genres/`,{headers:this.getAuthHeaders()})
+    return this.httpClient.get(`${this.LoginUrl}api/genres/`,{headers:this.getHeaders()})
   }
 
   loginUser(authData){
@@ -133,36 +189,7 @@ export class ApiService {
       console.log("this is direction",this.currentDir)
     }        
   }
-  getAuthHeaders(){
-
-    const languageExist=this.cookieService.check('language')
-    if (languageExist){
-       this.language=this.cookieService.get('language')
-    }else{
-       this.language="Farsi"
-    }
-    
-    const direction=this.cookieService.get('direction')
-    this.changeLang(direction)
-    console.log("this is direction",direction)
-    console.log("this is lang cookie",this.language)
-    const token=this.cookieService.get('bookstore-token')
-    const tokeExist=this.cookieService.check('bookstore-token')
-    if (tokeExist){
-      return new HttpHeaders({
-        'Content-Type':'application/json',
-        'Accept-Language':this.language,
-        Authorization:`Token ${token}` 
-        
-      })
-    }else{
-    return new HttpHeaders({
-      'Content-Type':'application/json',
-      'Accept-Language':this.language
-       
-      
-    })}
-  }
+  
   orderList = []
   bookExists=false
   // for showingc in the header
@@ -188,6 +215,12 @@ export class ApiService {
       const body=JSON.stringify({code:result})
       return this.httpClient.post(`${this.LoginUrl}api/factors/create_factor/` ,body,{headers:this.getAuthHeaders()})
   }
+  createFactorCode(result){
+   
+      const body=JSON.stringify({code:result})
+      console.log("body body",body)
+      return this.httpClient.post(`${this.LoginUrl}api/factors/create_factor/` ,body,{headers:this.getAuthHeaders()})
+  }
   
   
   
@@ -201,8 +234,8 @@ export class ApiService {
     console.log("xxxxxxxxxxxxxxxxxxxx",orders)
     const finalOrderList=orders
     var fCode:string
-    const cookieExist=this.cookieService.check('factorCode')
-    if (cookieExist){
+    const factorCodecookieExist=this.cookieService.check('factorCode')
+    if (factorCodecookieExist){
       fCode= JSON.parse(this.cookieService.get('factorCode'))
       factorObj={factorCode:fCode}
       while( i<finalOrderList.length){
@@ -362,6 +395,9 @@ export class ApiService {
   payFactor(factorId,data){
     const body=JSON.stringify({data})
     return this.httpClient.patch(`${this.LoginUrl}api/factors/${factorId}/` ,body,{headers:this.getAuthHeaders()})
+  }
+  goToGateWay(factorCode){
+    
   }
   getProfile(){
     const body=JSON.stringify({"profile":1})

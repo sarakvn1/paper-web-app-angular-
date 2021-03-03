@@ -13,7 +13,7 @@ import { PopularBookComponent } from './popular-book/popular-book.component';
 import { HomeComponent } from './home/home.component';
 import { ReviewFormComponent } from './book-details/review-form/review-form.component';
 import { CustomerProfileComponent } from './customer-profile/customer-profile.component';
-import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -24,11 +24,12 @@ import { PBooksComponent } from './publishers/p-books/p-books.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { RateComponent } from './rate/rate.component';
 import { DetailsComponent } from './customer-profile/details/details.component';
-import { DetailComponent } from './admin-panel/detail/detail.component';
+
 import { BasketComponent } from './basket/basket.component';
 import { ProcessAddressComponent } from './basket/process-address/process-address.component';
 import { ProcessInformationComponent } from './basket/process-information/process-information.component';
 import { PayAndSendComponent } from './basket/pay-and-send/pay-and-send.component';
+import { RateBookComponent } from './rate-book/rate-book.component';
 
 
 
@@ -37,19 +38,20 @@ return new TranslateHttpLoader(http);
 }
 
 const routes: Routes = [
+  {path:'',pathMatch:'full',redirectTo:'home'},
   {path:'home',component:HomeComponent},
   {path:'main',component:MainComponent},
   {path:'books',component:BookListComponent},
   {path:'books/:id',component:BookDetailsComponent},
   {path:'profile',component:CustomerProfileComponent},
-  {path:'admin',component:AdminPanelComponent},
+
   {path:'authors',component:AuthorsComponent},
   {path:'publishers',component:PublishersComponent},
   {path:'authorsBook/:id',component:BooksComponent},
   {path:'publishersBook/:id',component:PBooksComponent},
   {path:'aboutUs',component:AboutUsComponent},
   {path:'details/:id',component:DetailsComponent},
-  {path:'detail/:id',component:DetailComponent},
+  
   {path:'basket',component:BasketComponent},
   {path:'processAddress',component:ProcessAddressComponent},
   {path:'processInformation',component:ProcessInformationComponent},
@@ -70,7 +72,7 @@ const routes: Routes = [
     HomeComponent, 
     ReviewFormComponent, 
     CustomerProfileComponent, 
-    AdminPanelComponent, 
+     
     AuthorsComponent, 
     BooksComponent, 
     PublishersComponent, 
@@ -78,11 +80,11 @@ const routes: Routes = [
     AboutUsComponent, 
     RateComponent, 
     DetailsComponent, 
-    DetailComponent, 
+   
     BasketComponent, 
     ProcessAddressComponent, 
     ProcessInformationComponent, 
-    PayAndSendComponent],
+    PayAndSendComponent, RateBookComponent],
   imports: [
     
     ReactiveFormsModule,

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
+import { AddToCardService } from 'app/shared/services/add-to-card.service';
 import { ApiService } from 'app/shared/services/api.service';
 import { MessageService } from 'app/shared/services/message.service';
 import * as moment from 'moment';
@@ -26,7 +28,8 @@ export class PopularBookComponent implements OnInit {
     private messageService:MessageService,
     private translate:TranslateService,
     private cookieService:CookieService,
-    private router:Router
+    private router:Router,
+    private addToCardService:AddToCardService
     ) {
       translate.setDefaultLang('En');
     this.lang=this.cookieService.get('lang')
@@ -79,6 +82,7 @@ export class PopularBookComponent implements OnInit {
       },
       error=>console.log(error))
   }
+  
   getAllBooks(){
     this.apiService.getBooks().subscribe(
       data=>{
@@ -103,8 +107,9 @@ export class PopularBookComponent implements OnInit {
     // console.log("books",this.books)
     // this.books=this.genres[id]
   }
-  addToCard(book){
-    
+  
+  faStar=faStar
+  add(book){
     var today=moment().format();  
      const order={
       book_id:book.id,
@@ -115,39 +120,11 @@ export class PopularBookComponent implements OnInit {
       quantity:1,
       date:today
     }
-    // to refresh the header order list
-    
     this.apiService.getOrders(order)
     this.sendMessage("one item added")
-    // to api
-    const cookieExist=this.cookieService.check('factorCode')
-    if (cookieExist ==false){
-      this.apiService.createFactor(10).subscribe(
-        data=>{
-               console.log("send order to api",data['factor'].code)
-               this.cookieService.set('factorCode',JSON.stringify(data['factor'].code))
-               this.apiService.sendOrderItems().subscribe(
-                data=>{
-                  console.log("send order to api",data)
-                  
-                },
-                error=>console.log(error))
-               },
-        error=>console.log(error))
-    }else{
-      const factor=this.cookieService.get('factorCode')
-      console.log("this is my factor --------------",factor)
-      this.apiService.sendOrderItems().subscribe(
-        data=>{
-          console.log("send order to api",data)
-          
-        },
-        error=>console.log(error))
+    this.addToCardService.sendfactorCodeToServer()
+    
     }
-    
-   
-    
-  }
   // bookClicked(book){
   //   this.selectBook.emit(book)
   // }

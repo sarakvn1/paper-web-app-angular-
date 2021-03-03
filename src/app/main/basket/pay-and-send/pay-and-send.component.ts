@@ -1,16 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'app/shared/services/api.service';
-
+// import * as moment from "moment";
+// var moment = require('moment-jalaali');
+import * as moment from 'jalali-moment';
 @Component({
   selector: 'app-pay-and-send',
   templateUrl: './pay-and-send.component.html',
   styleUrls: ['./pay-and-send.component.scss']
 })
 export class PayAndSendComponent implements OnInit {
-
+  first:any
+  firstj:any
+  second:any
+  secondj:any
+  firstValue:any
+  secondValue:any
   constructor(
-    private apiService:ApiService
+    public apiService:ApiService
     ) { }
   totalCost:number
   cost:number
@@ -34,6 +41,57 @@ export class PayAndSendComponent implements OnInit {
       this.totalCost=Number(this.cost)+Number(this.shippingMethodForm.get("name").value )                       //latest value of firstname
       console.log(this.shippingMethodForm.get("name").value)   //latest value of firstname
     })
+    // var today = new Date();
+    // console.log("this is today",today)
+    this.getDate()
+  }
+  getDate(){
+    
+    var today = moment();
+    console.log(" today",today.format('dddd'),today.format('ll'))
+
+    var todayj = moment().locale('fa')
+
+    console.log(" امروز",todayj.format('dddd') ,todayj.format('ll'))
+    this.first =moment().add(2, 'd');
+    this.firstj =moment().locale('fa').add(2, 'd');
+    this.second =moment().add(3, 'd');
+    this.secondj =moment().locale('fa').add(3, 'd');
+    this.firstValue=this.first.format()
+    this.secondValue=this.second.format()
+    console.log(" befor first",this.first.format('dddd'),this.first.format('ll'))
+    console.log(" befor first",this.firstj.format('dddd'),this.firstj.format('ll'))
+    console.log(" befor second",this.second.format('dddd'),this.second.format('ll'))
+    console.log(" befor second",this.secondj.format('dddd'),this.secondj.format('ll'))
+    var weekDayFirst=this.first.weekday()
+    console.log("week day first",weekDayFirst)
+    var weekDaySecond=this.second.weekday()
+    console.log("week day second",weekDaySecond)
+    if (weekDayFirst==5){
+        this.firstj=moment().locale('fa').add(3,'d')
+        this.first=moment().add(3,'d')
+        this.secondj=moment().locale('fa').add(4,'d')
+        this.second=moment().add(4,'d')
+       }
+       if (weekDaySecond==5){
+          this.secondj=moment().locale('fa').add(4,'d')
+          this.second=moment().add(4,'d')
+        }
+    console.log(" after first",this.first.format('dddd'),this.first.format('ll'))
+    
+    console.log(" after first",this.firstj.format('dddd'),this.firstj.format('ll'))
+    console.log(" after second",this.second.format('dddd'),this.second.format('ll'))
+    
+    console.log(" after second",this.secondj.format('dddd'),this.secondj.format('ll'))
+  
+    // console.log(`Now: ${now.format('ll')}`);
+  
+    
+    this.first=this.first.format('dddd')+' '+this.first.format('ll')
+    this.firstj=this.firstj.format('dddd')+' '+this.firstj.format('ll')
+
+    this.second=this.second.format('dddd')+' '+this.second.format('ll')
+    this.secondj=this.secondj.format('dddd')+' '+this.secondj.format('ll')
   }
   shippingDateForm=new FormGroup(
     {
